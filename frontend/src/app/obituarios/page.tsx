@@ -19,12 +19,12 @@ export default function Obituarios() {
           </h1>
         </section>
 
-        <section className="mx-auto px-6" style={{ maxWidth: 1000, marginTop: "clamp(40px, 6vw, 64px)", paddingBottom: "clamp(56px, 8vw, 88px)" }}>
-          <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "clamp(28px, 4vw, 48px) clamp(24px, 4vw, 40px)" }}>
+        <section className="mx-auto px-6" style={{ maxWidth: 1000, marginTop: "clamp(56px, 8vw, 88px)", paddingBottom: "clamp(56px, 8vw, 88px)" }}>
+          <div className="grid justify-center" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(380px, 0.5fr))", gap: "clamp(80px, 12vw, 100px) clamp(70px, 14vw, 120px)" }}>
             {registros.map((o, i) => (
               <div key={i} className="relative w-full">
-                <img src="/assets/floritura-2.svg" alt="" className="block w-full h-auto" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center" style={{ gap: 2, padding: "0 9%" }}>
+                <img src="/assets/floritura-2.svg" alt="" className="block w-full h-auto opacity-70" />
+                <div className="inset-0 flex flex-col items-center justify-center text-center py-6" style={{ gap: 2 }}>
                   <p className="font-bold italic uppercase" style={{ fontFamily: "'Alegreya', serif", color: "#2C4A34", fontSize: 16, letterSpacing: 0.5, margin: "0 0 6px" }}>
                     {o.nombre}
                   </p>
@@ -32,10 +32,11 @@ export default function Obituarios() {
                   <p style={{ color: "#26261F", fontSize: 14, margin: 0 }}>UBICACION : {o.ubicacion}</p>
                   <p style={{ color: "#26261F", fontSize: 14, margin: 0 }}>Cochería: {o.cocheria}</p>
                 </div>
+                <img src="/assets/floritura-3.svg" alt="" className="block w-full h-auto opacity-70" />
               </div>
             ))}
           </div>
-          <img src="/assets/floritura-1.svg" alt="" className="block mx-auto" style={{ width: 240, height: "auto", marginTop: "clamp(40px, 6vw, 56px)" }} />
+          <img src="/assets/floritura-1.svg" alt="" className="block mx-auto" style={{ width: 240, height: "auto", marginTop: "clamp(90px, 12vw, 110px)" }} />
         </section>
       </main>
       <Footer />

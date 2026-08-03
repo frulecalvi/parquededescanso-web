@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -16,6 +16,30 @@ const navItems = [
 export default function Header() {
   const menuRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const [showEmergency, setShowEmergency] = useState(false);
+
+  // Detectar cuando el botón de urgencias de la home sale de vista
+  useEffect(() => {
+    if (pathname !== "/") {
+      setShowEmergency(false);
+      return;
+    }
+
+    const check = () => {
+      const btn = document.getElementById("urgencias-home-btn");
+      if (!btn) {
+        setShowEmergency(false);
+        return;
+      }
+      const rect = btn.getBoundingClientRect();
+      setShowEmergency(rect.bottom < 0);
+    };
+
+    window.addEventListener("scroll", check, { passive: true });
+    check();
+
+    return () => window.removeEventListener("scroll", check);
+  }, [pathname]);
 
   // Cerrar al navegar
   useEffect(() => {
@@ -65,7 +89,7 @@ export default function Header() {
 
       {/* ═══ MOBILE HEADER ═══ */}
       <header
-        className="sticky top-0 z-40 lg:hidden"
+        className="sticky top-0 z-40 xl:hidden"
         style={{ background: "#2C4A34" }}
       >
         <div
@@ -79,23 +103,48 @@ export default function Header() {
               style={{ height: 32, width: "auto", display: "block" }}
             />
           </Link>
-          <label
-            htmlFor="menu-toggle"
-            className="inline-flex items-center gap-2.5"
-            style={{
-              color: "#EEE8DC",
-              fontFamily: "'Alegreya', serif",
-              fontWeight: 700,
-              fontSize: 14,
-              letterSpacing: 2,
-              cursor: "pointer",
-              WebkitTapHighlightColor: "transparent",
-              touchAction: "manipulation",
-              minHeight: 44,
-              minWidth: 44,
-              userSelect: "none",
-            }}
-          >
+            {showEmergency && (
+              <a
+                href="tel:+5492614700700"
+                className="inline-flex items-center gap-1.5 rounded-full border-none"
+                style={{
+                  fontFamily: "'Alegreya', serif",
+                  fontWeight: 700,
+                  fontSize: 11,
+                  letterSpacing: 0.5,
+                  color: "#2C4A34",
+                  background: "#EEE8DC",
+                  padding: "8px 14px",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <img
+                  src="/assets/contacto-telefono.svg"
+                  alt=""
+                  style={{ height: 14, width: "auto", display: "block" }}
+                />
+                URGENCIAS
+              </a>
+            )}
+          <div className="flex items-center" style={{ gap: 12 }}>
+            <label
+              htmlFor="menu-toggle"
+              className="inline-flex items-center gap-2.5"
+              style={{
+                color: "#EEE8DC",
+                fontFamily: "'Alegreya', serif",
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 2,
+                cursor: "pointer",
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "manipulation",
+                minHeight: 44,
+                minWidth: 44,
+                userSelect: "none",
+              }}
+            >
             MENÚ
             <svg
               width="26"
@@ -108,12 +157,13 @@ export default function Header() {
               <rect y="15" width="26" height="3" fill="#EEE8DC" />
             </svg>
           </label>
+          </div>
         </div>
       </header>
 
       {/* ═══ DESKTOP HEADER ═══ */}
       <header
-        className="sticky top-0 z-40 hidden lg:block px-10"
+        className="sticky top-0 z-40 hidden xl:block px-10"
         style={{ background: "#2C4A34", height: 78 }}
       >
         <div
@@ -127,31 +177,57 @@ export default function Header() {
               style={{ height: 32, width: "auto", display: "block" }}
             />
           </Link>
-          <nav
-            className="flex flex-wrap items-center"
-            style={{ gap: "clamp(16px,2vw,32px)" }}
-          >
-            {navItems.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  style={{
-                    fontFamily: "'Alegreya', serif",
-                    fontWeight: active ? 700 : 500,
-                    fontSize: 13,
-                    letterSpacing: 1.5,
-                    color: active ? "#EEE8DC" : "#cdd6c8",
-                    borderBottom: active ? "2px solid #EEE8DC" : "none",
-                    paddingBottom: active ? 4 : 0,
-                  }}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          {showEmergency && (
+            <a
+              href="tel:+5492614700700"
+              className="inline-flex items-center gap-2 rounded-full border-none"
+              style={{
+                fontFamily: "'Alegreya', serif",
+                fontWeight: 700,
+                fontSize: 12,
+                letterSpacing: 1,
+                color: "#2C4A34",
+                background: "#EEE8DC",
+                padding: "8px 16px",
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <img
+                src="/assets/contacto-telefono.svg"
+                alt=""
+                style={{ height: 16, width: "auto", display: "block" }}
+              />
+              URGENCIAS
+            </a>
+          )}
+          <div className="flex items-center" style={{ gap: "clamp(16px,2vw,32px)" }}>
+            <nav
+              className="flex flex-wrap items-center"
+              style={{ gap: "clamp(16px,2vw,32px)" }}
+            >
+              {navItems.map((item) => {
+                const active = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    style={{
+                      fontFamily: "'Alegreya', serif",
+                      fontWeight: active ? 700 : 500,
+                      fontSize: 13,
+                      letterSpacing: 1.5,
+                      color: active ? "#EEE8DC" : "#cdd6c8",
+                      borderBottom: active ? "2px solid #EEE8DC" : "none",
+                      paddingBottom: active ? 4 : 0,
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
         </div>
       </header>
 

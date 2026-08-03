@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../app/**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
 
 @font-face {
   font-family: 'Alegreya';
@@ -61,25 +63,25 @@
   font-style: italic;
 }
 
-:root {
-  /* Ajustá este valor para escalar todo el sitio.
-     1.0 = tamaño original. 1.15 = 15% más grande. */
-  --scale: 1.15;
-}
+@layer base {
+  :root {
+    --scale: 1.15;
+  }
 
-body {
-  margin: 0;
-  background: #EEE8DC;
-  font-family: 'Alegreya', serif;
-  color: #26261F;
-  overflow-x: hidden;
-  zoom: var(--scale);
-}
+  body {
+    margin: 0;
+    background: #EEE8DC;
+    font-family: 'Alegreya', serif;
+    color: #26261F;
+    overflow-x: hidden;
+    zoom: var(--scale);
+  }
 
-a {
-  color: #4B6B45;
-  text-decoration: none;
-}
-a:hover {
-  color: #2C4A34;
+  a {
+    color: #4B6B45;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #2C4A34;
+  }
 }

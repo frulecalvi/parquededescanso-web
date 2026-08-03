@@ -35,6 +35,7 @@ export default function Home() {
             }}
           />
           <a
+            id="urgencias-home-btn"
             href="tel:+5492614700700"
             className="inline-flex items-center gap-2 rounded-full border-none cursor-pointer"
             style={{
@@ -48,7 +49,7 @@ export default function Home() {
               textDecoration: "none",
             }}
           >
-            <span aria-hidden="true">☎</span> LLAMAR A URGENCIAS FÚNEBRES
+            <span aria-hidden="true"><img src="/assets/contacto-telefono-light.png" alt="" style={{ height: 20, width: "auto", display: "block" }} /></span> LLAMAR A URGENCIAS FÚNEBRES
           </a>
           <p style={{ color: "rgb(75, 107, 69)", paddingTop: "2em" }}>Empresa Fúnebre • Cementerio Parque • Cremaciones • Salas Velatorias</p>
         </section>
