@@ -1,36 +1,17 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { WP_API_URL, type WpPost } from "@/lib/wordpress";
 
-export default function WpPosts() {
-  const [posts, setPosts] = useState<WpPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default async function WpPosts() {
+  let posts: WpPost[] = [];
+  let error: string | null = null;
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch(`${WP_API_URL}/posts?_embed=1&per_page=6`);
-        if (!res.ok) throw new Error(`Error ${res.status}`);
-        const data: WpPost[] = await res.json();
-        setPosts(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Error desconocido");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="py-24 text-center font-mono text-xs tracking-widest text-neutral-400">
-        CARGANDO
-      </div>
-    );
+  try {
+    const res = await fetch(`${WP_API_URL}/inicio`, {
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    posts = await res.json();
+  } catch (err) {
+    error = err instanceof Error ? err.message : "Error desconocido";
   }
 
   if (error) {
@@ -54,7 +35,7 @@ export default function WpPosts() {
 
   return (
     <div className="flex flex-col gap-0">
-      {posts.map((post, index) => (
+      {posts.map((post) => (
         <article
           key={post.id}
           className="group border-b border-neutral-200 py-12 first:border-t"
