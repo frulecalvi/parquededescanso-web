@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Regular.ttf') format('truetype');font-weight:400;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Italic.ttf') format('truetype');font-weight:400;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Medium.ttf') format('truetype');font-weight:500;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-MediumItalic.ttf') format('truetype');font-weight:500;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Bold.ttf') format('truetype');font-weight:700;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-BoldItalic.ttf') format('truetype');font-weight:700;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-ExtraBold.ttf') format('truetype');font-weight:800;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-ExtraBoldItalic.ttf') format('truetype');font-weight:800;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Black.ttf') format('truetype');font-weight:900;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-BlackItalic.ttf') format('truetype');font-weight:900;font-style:italic;}
+    body { margin: 0; background: #EEE8DC; }
+    a { color: #4B6B45; }
+    a:hover { color: #2C4A34; }
+  </style>
+</helmet>
+
+<div style="font-family:'Alegreya',serif;background:#EEE8DC;min-height:100vh;">
+
+  <sc-if value="{{isMobile}}" hint-placeholder-val="{{true}}">
+    <header style="position:sticky;top:0;z-index:40;background:#2C4A34;">
+      <div style="display:flex;align-items:center;justify-content:flex-end;padding:14px 20px;">
+        <button onClick="{{toggleMenu}}" style="display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;color:#EEE8DC;font-family:'Alegreya',serif;font-weight:700;font-size:14px;letter-spacing:2px;">
+          MENÚ
+          <svg width="26" height="18" viewBox="0 0 26 18"><rect width="26" height="3" fill="#EEE8DC"></rect><rect y="7.5" width="26" height="3" fill="#EEE8DC"></rect><rect y="15" width="26" height="3" fill="#EEE8DC"></rect></svg>
+        </button>
+      </div>
+    </header>
+    <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+      <div style="position:fixed;inset:0;background:#2C4A34;z-index:50;display:flex;flex-direction:column;">
+        <div style="display:flex;justify-content:flex-end;padding:18px 20px;">
+          <button onClick="{{closeMenu}}" style="background:none;border:none;color:#EEE8DC;font-size:34px;line-height:1;cursor:pointer;">×</button>
+        </div>
+        <nav style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;">
+          <a href="index.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Inicio</a>
+          <a href="nuestro-parque.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Nuestro Parque</a>
+          <a href="salas-velatorias.html" style="font-family:'Alegreya',serif;font-weight:700;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;border-bottom:2px solid #EEE8DC;padding-bottom:4px;">Salas Velatorias</a>
+          <a href="crematorio.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Crematorio</a>
+          <a href="obituarios.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Obituarios</a>
+          <a href="servicios.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Servicios</a>
+        </nav>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <sc-if value="{{isDesktop}}" hint-placeholder-val="{{false}}">
+    <header style="position:sticky;top:0;z-index:40;background:#2C4A34;">
+      <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:78px;flex-wrap:wrap;">
+        <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+          <img src="assets/logo-icon-light.svg" alt="Parque de Descanso" style="height:56px;width:auto;display:block;"/>
+        </a>
+        <nav style="display:flex;align-items:center;gap:clamp(16px,2vw,32px);flex-wrap:wrap;">
+          <a href="index.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">INICIO</a>
+          <a href="nuestro-parque.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">NUESTRO PARQUE</a>
+          <a href="salas-velatorias.html" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1.5px;color:#EEE8DC;text-decoration:none;border-bottom:2px solid #EEE8DC;padding-bottom:4px;">SALAS VELATORIAS</a>
+          <a href="crematorio.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">CREMATORIO</a>
+          <a href="obituarios.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">OBITUARIOS</a>
+          <a href="servicios.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">SERVICIOS</a>
+        </nav>
+      </div>
+    </header>
+  </sc-if>
+
+  <main>
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,6vw,64px) 24px 0;text-align:center;">
+      <h1 style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:2px;color:#2C4A34;font-size:clamp(26px,4vw,42px);margin:0;">SALAS VELATORIAS</h1>
+    </section>
+
+    <section style="max-width:1300px;margin:clamp(24px,4vw,40px) auto 0;padding:0 24px;">
+      <div style="position:relative;border-radius:28px;overflow:hidden;aspect-ratio:16/8;background:#ccc;">
+        <sc-for list="{{slidesData}}" as="s" hint-placeholder-count="6">
+          <img src="{{s.src}}" alt="Salas Velatorias" style="{{s.style}}"/>
+        </sc-for>
+        <button onClick="{{goPrev}}" aria-label="Anterior" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.25);border:none;color:#fff;width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+        <button onClick="{{goNext}}" aria-label="Siguiente" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.25);border:none;color:#fff;width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+      </div>
+    </section>
+
+    <section style="max-width:1000px;margin:clamp(40px,6vw,56px) auto 0;padding:0 24px;">
+      <sc-if value="{{isDesktop}}" hint-placeholder-val="{{true}}">
+        <div style="background:#2C4A34;border-radius:40px;padding:clamp(20px,2.2vw,26px) clamp(28px,4vw,40px);position:relative;overflow:visible;min-height:clamp(190px,19vw,230px);display:flex;align-items:center;">
+          <div style="flex:0 1 54%;max-width:54%;padding-right:clamp(140px,20vw,220px);position:relative;z-index:2;">
+            <p style="font-family:'Alegreya',serif;font-weight:700;color:#EAE2D2;font-size:clamp(14px,1.8vw,17px);letter-spacing:2px;margin:0 0 14px;">SALAS VELATORIAS</p>
+            <div style="color:#EAE2D2;font-size:clamp(13px,1.4vw,15px);line-height:1.7;display:flex;flex-direction:column;gap:10px;">
+              <p style="margin:0;">Ubicadas dentro del sector oeste de nuestro Parque, brindando calidez, ambiente climatizado, modernos diseños, atención personalizada para acompañar a familiares</p>
+              <p style="margin:0;">y visitas en un lugar confortable y rodeados de naturaleza.</p>
+            </div>
+          </div>
+          <img src="assets/pastilla-velatorios.png" alt="" style="position:absolute;right:clamp(12px,3vw,32px);top:50%;transform:translateY(-50%);height:clamp(340px,40vw,460px);width:auto;max-width:44%;object-fit:contain;display:block;z-index:1;"/>
+        </div>
+      </sc-if>
+      <sc-if value="{{isMobile}}" hint-placeholder-val="{{false}}">
+        <div style="background:#2C4A34;border-radius:32px;padding:28px 24px 32px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;overflow:hidden;">
+          <p style="font-family:'Alegreya',serif;font-weight:700;color:#EAE2D2;font-size:16px;letter-spacing:2px;margin:0;">SALAS VELATORIAS</p>
+          <div style="color:#EAE2D2;font-size:14px;line-height:1.7;display:flex;flex-direction:column;gap:10px;">
+            <p style="margin:0;">Ubicadas dentro del sector oeste de nuestro Parque, brindando calidez, ambiente climatizado, modernos diseños, atención personalizada para acompañar a familiares</p>
+            <p style="margin:0;">y visitas en un lugar confortable y rodeados de naturaleza.</p>
+          </div>
+          <img src="assets/pastilla-velatorios.png" alt="" style="width:100%;max-width:260px;height:auto;object-fit:contain;display:block;margin-top:6px;"/>
+        </div>
+      </sc-if>
+    </section>
+
+    <section style="max-width:1100px;margin:clamp(48px,7vw,72px) auto 0;padding:0 24px;">
+      <h2 style="font-family:'Alegreya',serif;font-weight:700;color:#2C4A34;font-size:clamp(20px,2.4vw,26px);letter-spacing:1px;text-decoration:underline;text-underline-offset:8px;margin:0 0 24px;">CONTACTO:</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,48px);">
+        <div style="flex:1 1 320px;">
+          <p style="font-style:italic;color:#26261F;font-size:15px;margin:0 0 18px;">Teléfonos para consultas en horario de 09:00 a 18:00 hs.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;color:#26261F;font-size:15px;">
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☎</span> Of. Cementerio Parque <strong>(261) 491-0279 / 491-2865</strong></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☎</span> Of. Centro <strong>(261) 421-6922 / 421-6516</strong></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☏</span> Of. Centro WhatsApp <strong>2615561461</strong></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☎</span> URGENCIAS FÚNEBRES <strong>261 4 700 700</strong></div>
+          </div>
+        </div>
+        <div style="flex:1 1 360px;min-height:220px;border-radius:16px;overflow:hidden;">
+          <iframe title="Ubicación Parque de Descanso" src="https://www.google.com/maps?q=Chac%C3%B3n+s%2Fn+Rodeo+de+la+Cruz+Guaymall%C3%A9n+Mendoza&output=embed" style="width:100%;height:100%;min-height:220px;border:0;display:block;"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1100px;margin:clamp(48px,7vw,72px) auto 0;padding:0 24px;">
+      <h2 style="font-family:'Alegreya',serif;font-weight:700;color:#2C4A34;font-size:clamp(20px,2.4vw,26px);letter-spacing:1px;text-decoration:underline;text-underline-offset:8px;margin:0 0 24px;">CONSULTAS:</h2>
+      <sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+        <p style="color:#2C4A34;font-size:16px;">¡Gracias! Recibimos tu consulta y te contactaremos a la brevedad.</p>
+      </sc-if>
+      <sc-if value="{{formVisible}}" hint-placeholder-val="{{true}}">
+        <form onSubmit="{{handleSubmit}}" style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;">
+            <input value="{{form.nombre}}" onChange="{{setNombre}}" placeholder="Nombre" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+            <input value="{{form.apellido}}" onChange="{{setApellido}}" placeholder="Apellido" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;">
+            <input value="{{form.email}}" onChange="{{setEmail}}" placeholder="Email" type="email" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+            <input value="{{form.telefono}}" onChange="{{setTelefono}}" placeholder="Teléfono" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+          </div>
+          <textarea value="{{form.mensaje}}" onChange="{{setMensaje}}" placeholder="Mensaje" rows="5" style="background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;resize:vertical;"></textarea>
+          <button type="submit" style="align-self:flex-start;font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#EEE8DC;background:#2C4A34;border:none;border-radius:9999px;padding:13px 32px;cursor:pointer;">ENVIAR</button>
+        </form>
+      </sc-if>
+    </section>
+
+    <footer style="margin-top:clamp(56px,8vw,80px);background:#2C4A34;color:#EEE8DC;padding:clamp(36px,5vw,52px) 24px 28px;">
+      <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,48px);font-size:14px;line-height:1.7;">
+        <div style="flex:1 1 300px;">
+          <p style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:1px;font-size:15px;margin:0 0 10px;">PARQUE</p>
+          <p style="margin:0 0 10px;">Chacón s/n – Rodeo de la Cruz – Guaymallén, Mendoza.</p>
+          <p style="margin:0 0 2px;">Horarios para visitas:</p>
+          <p style="margin:0 0 10px;">Lunes a Domingos de 09:00 a 18:00 hs.<br/>Los portones del Parque se cierran a las 17.30hs.</p>
+          <p style="margin:0 0 2px;">Horarios para visitas 24/12, 25/12, 31/12 y 01/01:</p>
+          <p style="margin:0 0 10px;">De 09:00 a 17:00 hs. Los portones se cierran a las 16.30hs.</p>
+          <p style="margin:0 0 2px;">Horarios de Oficinas de Administración en Parque:</p>
+          <p style="margin:0;">Lunes a Viernes de 9:00 a 18:00 hs. Sábados, Domingos y Feriados de 09:00 a 19:00hs.</p>
+        </div>
+        <div style="flex:1 1 300px;">
+          <p style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:1px;font-size:15px;margin:0 0 10px;">OFICINA DE ATENCIÓN EN CALLE COLÓN</p>
+          <p style="margin:0 0 10px;">Atención al clientes y ventas<br/>Colón 593, esq. 25 de Mayo (C.P 5500) Ciudad, Mendoza.</p>
+          <p style="margin:0 0 2px;">Horarios de atención:</p>
+          <p style="margin:0 0 18px;">Lunes a viernes de 8:30 a 18:00 hs.<br/>31 de diciembre de 8:30 a 13:00 hs.<br/>25 de diciembre y 1 de enero CERRADO.</p>
+          <p style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:1px;font-size:15px;margin:0 0 6px;">URGENCIAS FÚNEBRES</p>
+          <p style="margin:0;">+54 9 261 470 0700</p>
+        </div>
+      </div>
+      <div style="max-width:1100px;margin:32px auto 0;border-top:1px solid rgba(238,232,220,0.3);padding-top:18px;text-align:center;font-size:12.5px;color:#cdd6c8;">© 2022 Todos los derechos reservados Parque de Descanso Av Colón 593 Ciudad Mendoza</div>
+    </footer>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  slides = ['assets/velatorias-building.jpg','assets/hero-monument.jpg','assets/park-entrance.jpg','assets/park-2.jpg','assets/park-3.jpg','assets/park-4.jpg','assets/park-5.jpg'];
+  state = {
+    isMobile: false,
+    menuOpen: false,
+    slide: 0,
+    sent: false,
+    form: { nombre: '', apellido: '', email: '', telefono: '', mensaje: '' },
+  };
+
+  componentDidMount() {
+    this.mq = window.matchMedia('(max-width: 860px)');
+    this.updateMq = () => this.setState({ isMobile: this.mq.matches });
+    this.updateMq();
+    this.mq.addEventListener('change', this.updateMq);
+    this.timer = setInterval(() => {
+      this.setState(s => ({ slide: (s.slide + 1) % this.slides.length }));
+    }, 5500);
+  }
+
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.updateMq);
+    if (this.timer) clearInterval(this.timer);
+  }
+
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const slidesData = this.slides.map((src, i) => ({
+      src,
+      style: {
+        position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+        opacity: i === this.state.slide ? 1 : 0,
+        transition: 'opacity 0.9s ease',
+      },
+    }));
+    return {
+      isMobile,
+      isDesktop: !isMobile,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      slidesData,
+      goNext: () => this.setState(s => ({ slide: (s.slide + 1) % this.slides.length })),
+      goPrev: () => this.setState(s => ({ slide: (s.slide - 1 + this.slides.length) % this.slides.length })),
+      form: this.state.form,
+      sent: this.state.sent,
+      formVisible: !this.state.sent,
+      setNombre: e => this.setState(s => ({ form: { ...s.form, nombre: e.target.value } })),
+      setApellido: e => this.setState(s => ({ form: { ...s.form, apellido: e.target.value } })),
+      setEmail: e => this.setState(s => ({ form: { ...s.form, email: e.target.value } })),
+      setTelefono: e => this.setState(s => ({ form: { ...s.form, telefono: e.target.value } })),
+      setMensaje: e => this.setState(s => ({ form: { ...s.form, mensaje: e.target.value } })),
+      handleSubmit: e => { e.preventDefault(); this.setState({ sent: true }); },
+    };
+  }
+}
+
+</script>
+</body>
+</html>

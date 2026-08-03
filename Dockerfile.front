@@ -37,6 +37,8 @@ COPY frontend/ .
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_OUTPUT=export
+ENV NEXT_DIST_DIR=dist
 
 RUN --mount=type=cache,target=/app/.next/cache \
   if [ -f package-lock.json ]; then \

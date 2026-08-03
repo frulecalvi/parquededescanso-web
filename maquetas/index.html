@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Regular.ttf') format('truetype');font-weight:400;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Italic.ttf') format('truetype');font-weight:400;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Medium.ttf') format('truetype');font-weight:500;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-MediumItalic.ttf') format('truetype');font-weight:500;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Bold.ttf') format('truetype');font-weight:700;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-BoldItalic.ttf') format('truetype');font-weight:700;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-ExtraBold.ttf') format('truetype');font-weight:800;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-ExtraBoldItalic.ttf') format('truetype');font-weight:800;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Black.ttf') format('truetype');font-weight:900;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-BlackItalic.ttf') format('truetype');font-weight:900;font-style:italic;}
+    body { margin: 0; background: #EEE8DC; }
+    a { color: #4B6B45; }
+    a:hover { color: #2C4A34; }
+  </style>
+</helmet>
+
+<div style="font-family:'Alegreya',serif;background:#EEE8DC;min-height:100vh;">
+
+  <sc-if value="{{isMobile}}" hint-placeholder-val="{{true}}">
+    <header style="position:sticky;top:0;z-index:40;background:#2C4A34;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;">
+        <sc-if value="{{scrolled}}" hint-placeholder-val="{{false}}">
+          <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:11px;letter-spacing:1px;color:#2C4A34;background:#EEE8DC;border:none;border-radius:9999px;padding:9px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+            <span aria-hidden="true">☎</span> URGENCIAS
+          </button>
+        </sc-if>
+        <sc-if value="{{notScrolled}}" hint-placeholder-val="{{true}}">
+          <span></span>
+        </sc-if>
+        <button onClick="{{toggleMenu}}" style="display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;color:#EEE8DC;font-family:'Alegreya',serif;font-weight:700;font-size:14px;letter-spacing:2px;">
+          MENÚ
+          <svg width="26" height="18" viewBox="0 0 26 18"><rect width="26" height="3" fill="#EEE8DC"></rect><rect y="7.5" width="26" height="3" fill="#EEE8DC"></rect><rect y="15" width="26" height="3" fill="#EEE8DC"></rect></svg>
+        </button>
+      </div>
+    </header>
+  </sc-if>
+  <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+    <div style="position:fixed;inset:0;background:#2C4A34;z-index:50;display:flex;flex-direction:column;">
+      <div style="display:flex;justify-content:flex-end;padding:18px 20px;">
+        <button onClick="{{closeMenu}}" style="background:none;border:none;color:#EEE8DC;font-size:34px;line-height:1;cursor:pointer;">×</button>
+      </div>
+      <nav style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;">
+        <a href="index.html" style="font-family:'Alegreya',serif;font-weight:700;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;border-bottom:2px solid #EEE8DC;padding-bottom:4px;">Inicio</a>
+        <a href="nuestro-parque.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Nuestro Parque</a>
+        <a href="salas-velatorias.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Salas Velatorias</a>
+        <a href="crematorio.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Crematorio</a>
+        <a href="obituarios.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Obituarios</a>
+        <a href="servicios.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Servicios</a>
+      </nav>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isDesktop}}" hint-placeholder-val="{{false}}">
+    <sc-if value="{{notScrolled}}" hint-placeholder-val="{{true}}">
+      <header style="position:sticky;top:0;z-index:40;background:#2C4A34;">
+        <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:78px;flex-wrap:wrap;">
+          <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+            <img src="assets/logo-icon-light.svg" alt="Parque de Descanso" style="height:56px;width:auto;display:block;"/>
+          </a>
+          <nav style="display:flex;align-items:center;gap:clamp(16px,2vw,32px);flex-wrap:wrap;">
+            <a href="index.html" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1.5px;color:#EEE8DC;text-decoration:none;border-bottom:2px solid #EEE8DC;padding-bottom:4px;">INICIO</a>
+            <a href="nuestro-parque.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">NUESTRO PARQUE</a>
+            <a href="salas-velatorias.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">SALAS VELATORIAS</a>
+            <a href="crematorio.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">CREMATORIO</a>
+            <a href="obituarios.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">OBITUARIOS</a>
+            <a href="servicios.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">SERVICIOS</a>
+          </nav>
+        </div>
+      </header>
+    </sc-if>
+    <sc-if value="{{scrolled}}" hint-placeholder-val="{{false}}">
+      <header style="position:sticky;top:0;z-index:40;background:#EEE8DC;border-bottom:1px solid rgba(44,74,52,0.15);">
+        <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;">
+          <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:12px;letter-spacing:1px;color:#2C4A34;background:#EEE8DC;border:1.5px solid #2C4A34;border-radius:9999px;padding:10px 20px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+            <span aria-hidden="true">☎</span> LLAMAR A URGENCIAS FÚNEBRES
+          </button>
+          <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+            <img src="assets/logo-icon-green.svg" alt="Parque de Descanso" style="height:40px;width:auto;display:block;"/>
+          </a>
+          <button onClick="{{toggleMenu}}" type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1.5px;color:#2C4A34;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;">
+            MENÚ
+            <svg width="22" height="16" viewBox="0 0 26 18"><rect width="26" height="3" fill="#2C4A34"></rect><rect y="7.5" width="26" height="3" fill="#2C4A34"></rect><rect y="15" width="26" height="3" fill="#2C4A34"></rect></svg>
+          </button>
+        </div>
+      </header>
+    </sc-if>
+  </sc-if>
+
+  <main>
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,6vw,64px) 24px 0;text-align:center;">
+      <img src="assets/logo-full-green.svg" alt="Parque de Descanso" style="width:clamp(180px,24vw,300px);height:auto;margin:0 auto 22px;display:block;"/>
+      <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:12px;letter-spacing:1px;color:#EAE2D2;background:#2C4A34;border:none;border-radius:9999px;padding:12px 26px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;margin:0;">
+        <span aria-hidden="true">☎</span> LLAMAR A URGENCIAS FÚNEBRES
+      </button>
+    </section>
+
+    <section style="max-width:1300px;margin:clamp(24px,4vw,40px) auto 0;padding:0 24px;">
+      <sc-if value="{{isDesktop}}" hint-placeholder-val="{{false}}">
+        <div style="position:relative;border-radius:28px;overflow:hidden;aspect-ratio:16/8;background:#ccc;">
+          <sc-for list="{{slidesData}}" as="s" hint-placeholder-count="6">
+            <img src="{{s.src}}" alt="Parque de Descanso" style="{{s.style}}"/>
+          </sc-for>
+          <button onClick="{{goPrev}}" aria-label="Anterior" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.25);border:none;color:#fff;width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+          <button onClick="{{goNext}}" aria-label="Siguiente" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.25);border:none;color:#fff;width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{isMobile}}" hint-placeholder-val="{{true}}">
+        <div style="position:relative;border-radius:20px;overflow:hidden;height:40vh;background:#ccc;">
+          <sc-for list="{{slidesData}}" as="s" hint-placeholder-count="6">
+            <img src="{{s.src}}" alt="Parque de Descanso" style="{{s.style}}"/>
+          </sc-for>
+          <button onClick="{{goPrev}}" aria-label="Anterior" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.25);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+          <button onClick="{{goNext}}" aria-label="Siguiente" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.25);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+        </div>
+      </sc-if>
+    </section>
+
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,5vw,48px) 24px 0;">
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,4vw,44px);">
+        <a href="#" aria-label="Facebook" style="color:#2C4A34;"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8.2h2.75l.41-3.2h-3.16V7.5c0-.93.26-1.56 1.6-1.56h1.7V3.1C15.98 3.03 15.06 3 13.98 3c-2.55 0-4.3 1.55-4.3 4.4v2.2H6.9v3.2h2.78V21h3.82z"></path></svg></a>
+        <a href="#" aria-label="Instagram" style="color:#2C4A34;"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1"></circle></svg></a>
+        <a href="#" aria-label="YouTube" style="color:#2C4A34;"><svg width="34" height="30" viewBox="0 0 34 24" fill="currentColor"><rect x="0" y="0" width="34" height="24" rx="6"></rect><path d="M13.5 7l9 5-9 5V7z" fill="#EEE8DC"></path></svg></a>
+        <a href="#" aria-label="WhatsApp" style="color:#2C4A34;"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.3-4.1A8 8 0 1 1 9 18.4L4 20z"></path><path d="M8.5 8.6c0 3.3 2.7 6 6 6 .5 0 1-.6.9-1.1l-.2-1a.9.9 0 0 0-.9-.7l-1.4.2a5 5 0 0 1-2.9-2.9l.2-1.4a.9.9 0 0 0-.7-.9l-1-.2c-.5-.1-1.1.4-1.1.9v1.1z" fill="currentColor" stroke="none"></path></svg></a>
+      </div>
+    </section>
+
+    <section style="max-width:900px;margin:0 auto;padding:clamp(24px,4vw,36px) 24px 0;">
+      <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+        <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#4B6B45;background:#EEE8DC;border:1.5px solid #4B6B45;border-radius:9999px;padding:14px 22px;cursor:pointer;">LLAMAR A URGENCIAS FÚNEBRES</button>
+        <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#4B6B45;background:#EEE8DC;border:1.5px solid #4B6B45;border-radius:9999px;padding:14px 22px;cursor:pointer;">LLAMAR A OFICINAS DE CIUDAD</button>
+        <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#4B6B45;background:#EEE8DC;border:1.5px solid #4B6B45;border-radius:9999px;padding:14px 22px;cursor:pointer;">LLAMAR A OFICINA DEL PARQUE</button>
+        <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#EEE8DC;background:#2C4A34;border:none;border-radius:9999px;padding:14px 26px;cursor:pointer;">REALIZÁ TUS PAGOS AQUÍ</button>
+      </div>
+    </section>
+
+    <section style="max-width:1200px;margin:clamp(40px,6vw,64px) auto 0;padding:0 24px;display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,56px);align-items:center;">
+      <div style="flex:1 1 300px;max-width:340px;margin:0 auto;">
+        <img src="assets/park-entrance.jpg" alt="Entrada Parque de Descanso" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:50%/38%;display:block;border:2px solid #4B6B45;"/>
+      </div>
+      <div style="flex:2 1 420px;">
+        <h2 style="font-family:'Alegreya',serif;letter-spacing:4px;color:#4B6B45;font-size:clamp(20px,2.6vw,26px);margin:0 0 20px;">NOSOTROS</h2>
+        <div style="color:#26261F;font-size:clamp(14px,1.4vw,16px);line-height:1.8;display:flex;flex-direction:column;gap:14px;">
+          <p style="margin:0;">Nos ocupamos de sus necesidades e inquietudes con un grupo de asesores altamente capacitados, que lo van a acompañar en la toma de la decisión.</p>
+          <p style="margin:0;">Amplios prados verdes, grandes canteros de flores, lugares que favorecen la reflexión en contacto con la naturaleza, basándonos en el concepto de religar al hombre con sus tradiciones.</p>
+          <p style="margin:0;">El predio está dividido en 47 sectores distribuidos en el Parque Este y el Parque Oeste; han sido diseñados por ingenieros agrónomos y paisajistas que eligen las especies forestales y arbustos ornamentales más adecuados a nuestro clima.</p>
+          <p style="margin:0;">Los modernos sistemas de riego hacen posible el mantenimiento de estos, como así también del césped que se resiembra anualmente.</p>
+          <p style="margin:0;">Ahora, contamos con servicio de Cremación, innovamos en tecnología para mejorar nuestras prestaciones, una opción digna que permitirá la decisión correcta para una emotiva despedida.</p>
+          <p style="margin:0;">Respeto y transparencia en la atención de nuestros servicios.</p>
+          <p style="margin:0;font-style:italic;color:#4B6B45;">Estamos para asesorar, ayudar y acompañar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:800px;margin:clamp(32px,5vw,48px) auto 0;padding:0 24px;">
+      <div style="background:#2C4A34;border-radius:40px;padding:clamp(28px,4vw,40px) clamp(20px,4vw,36px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;transition:background 0.25s ease;cursor:default;" style-hover="{&quot;background&quot;:&quot;#ddd4c5&quot;}">
+        <p style="font-family:'Alegreya',serif;font-weight:700;color:#EAE2D2;font-size:clamp(15px,2vw,19px);letter-spacing:1px;margin:0;transition:color 0.25s ease;" style-hover="{&quot;color&quot;:&quot;#2c4a37&quot;}">SERVICIO EXCLUSIVO PARA EMPRESAS FÚNEBRES</p>
+        <button type="button" style="font-family:'Alegreya',serif;font-weight:700;font-size:12px;letter-spacing:1px;color:#2C4A34;background:#EEE8DC;border:none;border-radius:9999px;padding:11px 24px;cursor:pointer;">CLICK AQUÍ</button>
+      </div>
+    </section>
+
+    <section style="max-width:1100px;margin:clamp(48px,7vw,72px) auto 0;padding:0 24px;">
+      <h2 style="font-family:'Alegreya',serif;font-weight:700;color:#2C4A34;font-size:clamp(20px,2.4vw,26px);letter-spacing:1px;text-decoration:underline;text-underline-offset:8px;margin:0 0 24px;">CONTACTO:</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,48px);">
+        <div style="flex:1 1 320px;">
+          <p style="font-style:italic;color:#26261F;font-size:15px;margin:0 0 18px;">Teléfonos para consultas en horario de 09:00 a 18:00 hs.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;color:#26261F;font-size:15px;">
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☎</span> Of. Cementerio Parque <strong>(261) 491-0279 / 491-2865</strong></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☎</span> Of. Centro <strong>(261) 421-6922 / 421-6516</strong></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☏</span> Of. Centro WhatsApp <strong>2615561461</strong></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="color:#4B6B45;">☎</span> URGENCIAS FÚNEBRES <strong>261 4 700 700</strong></div>
+          </div>
+        </div>
+        <div style="flex:1 1 360px;min-height:220px;border-radius:16px;overflow:hidden;">
+          <iframe title="Ubicación Parque de Descanso" src="https://www.google.com/maps?q=Chac%C3%B3n+s%2Fn+Rodeo+de+la+Cruz+Guaymall%C3%A9n+Mendoza&output=embed" style="width:100%;height:100%;min-height:220px;border:0;display:block;"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1100px;margin:clamp(48px,7vw,72px) auto 0;padding:0 24px;">
+      <h2 style="font-family:'Alegreya',serif;font-weight:700;color:#2C4A34;font-size:clamp(20px,2.4vw,26px);letter-spacing:1px;text-decoration:underline;text-underline-offset:8px;margin:0 0 24px;">CONSULTAS:</h2>
+      <sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+        <p style="color:#2C4A34;font-size:16px;">¡Gracias! Recibimos tu consulta y te contactaremos a la brevedad.</p>
+      </sc-if>
+      <sc-if value="{{formVisible}}" hint-placeholder-val="{{true}}">
+        <form onSubmit="{{handleSubmit}}" style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;">
+            <input value="{{form.nombre}}" onChange="{{setNombre}}" placeholder="Nombre" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+            <input value="{{form.apellido}}" onChange="{{setApellido}}" placeholder="Apellido" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;">
+            <input value="{{form.email}}" onChange="{{setEmail}}" placeholder="Email" type="email" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+            <input value="{{form.telefono}}" onChange="{{setTelefono}}" placeholder="Teléfono" style="flex:1 1 260px;background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;"/>
+          </div>
+          <textarea value="{{form.mensaje}}" onChange="{{setMensaje}}" placeholder="Mensaje" rows="5" style="background:#e6ded0;border:none;border-radius:8px;padding:14px 16px;font-family:'Alegreya',serif;font-size:15px;color:#26261F;resize:vertical;"></textarea>
+          <button type="submit" style="align-self:flex-start;font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#EEE8DC;background:#2C4A34;border:none;border-radius:9999px;padding:13px 32px;cursor:pointer;">ENVIAR</button>
+        </form>
+      </sc-if>
+    </section>
+
+    <footer style="margin-top:clamp(56px,8vw,80px);background:#2C4A34;color:#EEE8DC;padding:clamp(36px,5vw,52px) 24px 28px;">
+      <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,48px);font-size:14px;line-height:1.7;">
+        <div style="flex:1 1 300px;">
+          <p style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:1px;font-size:15px;margin:0 0 10px;">PARQUE</p>
+          <p style="margin:0 0 10px;">Chacón s/n – Rodeo de la Cruz – Guaymallén, Mendoza.</p>
+          <p style="margin:0 0 2px;">Horarios para visitas:</p>
+          <p style="margin:0 0 10px;">Lunes a Domingos de 09:00 a 18:00 hs.<br/>Los portones del Parque se cierran a las 17.30hs.</p>
+          <p style="margin:0 0 2px;">Horarios para visitas 24/12, 25/12, 31/12 y 01/01:</p>
+          <p style="margin:0 0 10px;">De 09:00 a 17:00 hs. Los portones se cierran a las 16.30hs.</p>
+          <p style="margin:0 0 2px;">Horarios de Oficinas de Administración en Parque:</p>
+          <p style="margin:0;">Lunes a Viernes de 9:00 a 18:00 hs. Sábados, Domingos y Feriados de 09:00 a 19:00hs.</p>
+        </div>
+        <div style="flex:1 1 300px;">
+          <p style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:1px;font-size:15px;margin:0 0 10px;">OFICINA DE ATENCIÓN EN CALLE COLÓN</p>
+          <p style="margin:0 0 10px;">Atención al clientes y ventas<br/>Colón 593, esq. 25 de Mayo (C.P 5500) Ciudad, Mendoza.</p>
+          <p style="margin:0 0 2px;">Horarios de atención:</p>
+          <p style="margin:0 0 18px;">Lunes a viernes de 8:30 a 18:00 hs.<br/>31 de diciembre de 8:30 a 13:00 hs.<br/>25 de diciembre y 1 de enero CERRADO.</p>
+          <p style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:1px;font-size:15px;margin:0 0 6px;">URGENCIAS FÚNEBRES</p>
+          <p style="margin:0;">+54 9 261 470 0700</p>
+        </div>
+      </div>
+      <div style="max-width:1100px;margin:32px auto 0;border-top:1px solid rgba(238,232,220,0.3);padding-top:18px;text-align:center;font-size:12.5px;color:#cdd6c8;">© 2022 Todos los derechos reservados Parque de Descanso Av Colón 593 Ciudad Mendoza</div>
+    </footer>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  slides = ['assets/hero-monument.jpg','assets/park-entrance.jpg','assets/park-1.jpg','assets/park-2.jpg','assets/park-3.jpg','assets/park-4.jpg','assets/park-5.jpg'];
+  state = {
+    isMobile: false,
+    menuOpen: false,
+    slide: 0,
+    sent: false,
+    scrolled: false,
+    form: { nombre: '', apellido: '', email: '', telefono: '', mensaje: '' },
+  };
+
+  componentDidMount() {
+    this.mq = window.matchMedia('(max-width: 860px)');
+    this.updateMq = () => this.setState({ isMobile: this.mq.matches });
+    this.updateMq();
+    this.mq.addEventListener('change', this.updateMq);
+    this.timer = setInterval(() => {
+      this.setState(s => ({ slide: (s.slide + 1) % this.slides.length }));
+    }, 5500);
+    this.onScroll = () => {
+      const isScrolled = window.scrollY > 40;
+      if (isScrolled !== this.state.scrolled) this.setState({ scrolled: isScrolled });
+    };
+    window.addEventListener('scroll', this.onScroll);
+  }
+
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.updateMq);
+    if (this.timer) clearInterval(this.timer);
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+  }
+
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const slidesData = this.slides.map((src, i) => ({
+      src,
+      style: {
+        position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+        opacity: i === this.state.slide ? 1 : 0,
+        transition: 'opacity 0.9s ease',
+      },
+    }));
+    return {
+      isMobile,
+      isDesktop: !isMobile,
+      scrolled: this.state.scrolled,
+      notScrolled: !this.state.scrolled,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      slidesData,
+      goNext: () => this.setState(s => ({ slide: (s.slide + 1) % this.slides.length })),
+      goPrev: () => this.setState(s => ({ slide: (s.slide - 1 + this.slides.length) % this.slides.length })),
+      form: this.state.form,
+      sent: this.state.sent,
+      formVisible: !this.state.sent,
+      setNombre: e => this.setState(s => ({ form: { ...s.form, nombre: e.target.value } })),
+      setApellido: e => this.setState(s => ({ form: { ...s.form, apellido: e.target.value } })),
+      setEmail: e => this.setState(s => ({ form: { ...s.form, email: e.target.value } })),
+      setTelefono: e => this.setState(s => ({ form: { ...s.form, telefono: e.target.value } })),
+      setMensaje: e => this.setState(s => ({ form: { ...s.form, mensaje: e.target.value } })),
+      handleSubmit: e => { e.preventDefault(); this.setState({ sent: true }); },
+    };
+  }
+}
+
+</script>
+</body>
+</html>

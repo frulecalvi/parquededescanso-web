@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Regular.ttf') format('truetype');font-weight:400;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Italic.ttf') format('truetype');font-weight:400;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Medium.ttf') format('truetype');font-weight:500;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-MediumItalic.ttf') format('truetype');font-weight:500;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Bold.ttf') format('truetype');font-weight:700;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-BoldItalic.ttf') format('truetype');font-weight:700;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-ExtraBold.ttf') format('truetype');font-weight:800;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-ExtraBoldItalic.ttf') format('truetype');font-weight:800;font-style:italic;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-Black.ttf') format('truetype');font-weight:900;font-style:normal;}
+    @font-face{font-family:'Alegreya';src:url('assets/fonts/AlegreyaSC-BlackItalic.ttf') format('truetype');font-weight:900;font-style:italic;}
+    body { margin: 0; background: #EEE8DC; }
+    a { color: #4B6B45; }
+    a:hover { color: #2C4A34; }
+  </style>
+</helmet>
+
+<div style="font-family:'Alegreya',serif;background:#EEE8DC;min-height:100vh;">
+
+  <sc-if value="{{isMobile}}" hint-placeholder-val="{{true}}">
+    <header style="position:sticky;top:0;z-index:40;background:#2C4A34;">
+      <div style="display:flex;align-items:center;justify-content:flex-end;padding:14px 20px;">
+        <button onClick="{{toggleMenu}}" style="display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;color:#EEE8DC;font-family:'Alegreya',serif;font-weight:700;font-size:14px;letter-spacing:2px;">
+          MENÚ
+          <svg width="26" height="18" viewBox="0 0 26 18"><rect width="26" height="3" fill="#EEE8DC"></rect><rect y="7.5" width="26" height="3" fill="#EEE8DC"></rect><rect y="15" width="26" height="3" fill="#EEE8DC"></rect></svg>
+        </button>
+      </div>
+    </header>
+    <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+      <div style="position:fixed;inset:0;background:#2C4A34;z-index:50;display:flex;flex-direction:column;">
+        <div style="display:flex;justify-content:flex-end;padding:18px 20px;">
+          <button onClick="{{closeMenu}}" style="background:none;border:none;color:#EEE8DC;font-size:34px;line-height:1;cursor:pointer;">×</button>
+        </div>
+        <nav style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;">
+          <a href="index.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Inicio</a>
+          <a href="nuestro-parque.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Nuestro Parque</a>
+          <a href="salas-velatorias.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Salas Velatorias</a>
+          <a href="crematorio.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Crematorio</a>
+          <a href="obituarios.html" style="font-family:'Alegreya',serif;font-weight:700;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;border-bottom:2px solid #EEE8DC;padding-bottom:4px;">Obituarios</a>
+          <a href="servicios.html" style="font-family:'Alegreya',serif;font-size:24px;color:#EEE8DC;text-decoration:none;letter-spacing:1px;">Servicios</a>
+        </nav>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <sc-if value="{{isDesktop}}" hint-placeholder-val="{{false}}">
+    <header style="position:sticky;top:0;z-index:40;background:#2C4A34;">
+      <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:78px;flex-wrap:wrap;">
+        <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+          <img src="assets/logo-icon-light.svg" alt="Parque de Descanso" style="height:56px;width:auto;display:block;"/>
+        </a>
+        <nav style="display:flex;align-items:center;gap:clamp(16px,2vw,32px);flex-wrap:wrap;">
+          <a href="index.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">INICIO</a>
+          <a href="nuestro-parque.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">NUESTRO PARQUE</a>
+          <a href="salas-velatorias.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">SALAS VELATORIAS</a>
+          <a href="crematorio.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">CREMATORIO</a>
+          <a href="obituarios.html" style="font-family:'Alegreya',serif;font-weight:700;font-size:13px;letter-spacing:1.5px;color:#EEE8DC;text-decoration:none;border-bottom:2px solid #EEE8DC;padding-bottom:4px;">OBITUARIOS</a>
+          <a href="servicios.html" style="font-family:'Alegreya',serif;font-weight:500;font-size:13px;letter-spacing:1.5px;color:#cdd6c8;text-decoration:none;">SERVICIOS</a>
+        </nav>
+      </div>
+    </header>
+  </sc-if>
+
+  <main>
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,6vw,64px) 24px 0;text-align:center;">
+      <h1 style="font-family:'Alegreya',serif;font-weight:700;letter-spacing:2px;color:#2C4A34;font-size:clamp(26px,4vw,42px);margin:0;">OBITUARIOS</h1>
+    </section>
+
+    <section style="max-width:1000px;margin:clamp(40px,6vw,64px) auto 0;padding:0 24px clamp(56px,8vw,88px);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:clamp(28px,4vw,48px) clamp(24px,4vw,40px);">
+        <sc-for list="{{obituarios}}" as="o" hint-placeholder-count="4">
+          <div style="position:relative;width:100%;">
+            <img src="assets/floritura-2.svg" alt="" style="width:100%;height:auto;display:block;"/>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0 9%;text-align:center;">
+              <p style="font-family:'Alegreya',serif;font-weight:700;font-style:italic;color:#2C4A34;font-size:16px;letter-spacing:0.5px;margin:0 0 6px;text-transform:uppercase;">{{o.nombre}}</p>
+              <p style="color:#26261F;font-size:14px;margin:0;">INHUMACION: {{o.fecha}} A LAS {{o.hora}} HS</p>
+              <p style="color:#26261F;font-size:14px;margin:0;">UBICACION : {{o.ubicacion}}</p>
+              <p style="color:#26261F;font-size:14px;margin:0;">Cochería: {{o.cocheria}}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <img src="assets/floritura-1.svg" alt="" style="width:240px;height:auto;display:block;margin:clamp(40px,6vw,56px) auto 0;"/>
+    </section>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  registros = [
+    { nombre: 'Zakalik Juana', fecha: '25/07/2026', hora: '14:00', ubicacion: 'SECTOR 15 FRACCION 04 PARCELA 20', cocheria: 'FLORES' },
+    { nombre: 'Bajinay Florencia Esther', fecha: '25/07/2026', hora: '17:00', ubicacion: 'SECTOR 40 FRACCION 02 PARCELA 33', cocheria: 'BOSCHIN' },
+    { nombre: 'Garcia Alvarez Maria Celia', fecha: '25/07/2026', hora: '12:30', ubicacion: 'SECTOR 13 FRACCION 11 PARCELA 51', cocheria: 'FLORES' },
+    { nombre: 'Barroso Antonia Ramona', fecha: '25/07/2026', hora: '10:00', ubicacion: 'SECTOR 19 FRACCION 02 PARCELA 15', cocheria: 'BOSCHIN' },
+  ];
+  state = { isMobile: false, menuOpen: false };
+
+  componentDidMount() {
+    this.mq = window.matchMedia('(max-width: 860px)');
+    this.updateMq = () => this.setState({ isMobile: this.mq.matches });
+    this.updateMq();
+    this.mq.addEventListener('change', this.updateMq);
+  }
+
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.updateMq);
+  }
+
+  renderVals() {
+    return {
+      isMobile: this.state.isMobile,
+      isDesktop: !this.state.isMobile,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      obituarios: this.registros,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
