@@ -32,3 +32,30 @@ export interface Obituario {
   cocheria: string;
   inhumacion_cremacion: string;
 }
+
+export interface NosotrosData {
+  id?: number;
+  texto_nosotros: string;
+  frase_final_nosotros: string;
+}
+
+export interface NuestroParqueData {
+  id?: number;
+  texto_nuestro_parque: string;
+}
+
+export interface SalasVelatoriasData {
+  id?: number;
+  texto_salas_velatorias: string;
+}
+
+export interface CrematorioData {
+  id?: number;
+  texto_crematorio: string;
+}
+
+export interface ServiciosData {
+  id?: number;
+  subtitulo_servicios: string;
+  texto_servicios: string;
+}

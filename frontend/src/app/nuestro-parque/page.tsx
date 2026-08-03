@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import ContactForm from "@/components/ContactForm";
 import ImageSlider from "@/components/ImageSlider";
+import { NuestroParqueData, WP_API_URL } from "@/lib/wordpress";
 
 const npSlides = [
   { src: "/assets/park-2.jpg", alt: "Nuestro Parque" },
@@ -14,7 +15,20 @@ const npSlides = [
   { src: "/assets/park-5.jpg", alt: "Nuestro Parque" },
 ];
 
-export default function NuestroParque() {
+export default async function NuestroParque() {
+  let data: NuestroParqueData | null = null;
+  let error: string | null = null;
+
+  try {
+    const res = await fetch(`${WP_API_URL}/nuestro-parque?slug=ajustes-nuestro-parque`, {
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    data = (await res.json())[0];
+  } catch (err) {
+    error = err instanceof Error ? err.message : "Error desconocido";
+  }
+
   return (
     <div style={{ fontFamily: "'Alegreya', serif", background: "#EEE8DC", minHeight: "100vh" }}>
       <Header />
@@ -31,22 +45,42 @@ export default function NuestroParque() {
           <div className="hidden md:flex items-center relative overflow-visible" style={{ background: "#2C4A34", borderRadius: 40, padding: "clamp(20px, 2.2vw, 26px) clamp(28px, 4vw, 40px)", minHeight: "clamp(190px, 19vw, 230px)" }}>
             <div style={{ flex: "0 1 54%", maxWidth: "54%", position: "relative", zIndex: 2 }}>
               <p className="font-bold" style={{ fontFamily: "'Alegreya', serif", color: "#EAE2D2", fontSize: "clamp(14px, 1.8vw, 17px)", letterSpacing: 2, margin: "0 0 14px" }}>
-                NUESTRO PARQUE
+                {"NUESTRO PARQUE"}
               </p>
-              <div className="flex flex-col" style={{ color: "#EAE2D2", fontSize: "clamp(13px, 1.4vw, 15px)", lineHeight: 1.7, gap: 10 }}>
+              {error ? (
+                <p style={{ color: "#EAE2D2", fontSize: 13, margin: 0 }}>No se pudo cargar el contenido.</p>
+              ) : data?.texto_nuestro_parque ? (
+                <div
+                  className="flex flex-col"
+                  style={{ color: "#EAE2D2", fontSize: "clamp(13px, 1.4vw, 15px)", lineHeight: 1.7, gap: 10 }}
+                  dangerouslySetInnerHTML={{ __html: data.texto_nuestro_parque }}
+                />
+              ) : (
+                <div className="flex flex-col" style={{ color: "#EAE2D2", fontSize: "clamp(13px, 1.4vw, 15px)", lineHeight: 1.7, gap: 10 }}>
+                  <p style={{ margin: 0 }}>Rodeados por una Naturaleza en su máximo esplendor, despedir, recordar y sentir en un entorno de belleza, paz y armonía.</p>
+                  <p style={{ margin: 0 }}>Amplios prados verdes, grandes canteros de flores, lugares que favorecen la reflexión en contacto con la naturaleza, basándonos en el concepto de religar al hombre con sus tradiciones.</p>
+                </div>
+              )}
+            </div>
+            <img src={"/assets/pastilla-nuestro-parque.png"} alt="" className="block" style={{ position: "absolute", right: "clamp(12px, 3vw, 32px)", top: "50%", transform: "translateY(-50%)", height: "clamp(340px, 40vw, 460px)", width: "auto", maxWidth: "44%", objectFit: "contain", zIndex: 1 }} />
+          </div>
+          <div className="flex md:hidden flex-col items-center text-center" style={{ background: "#2C4A34", borderRadius: 32, padding: "28px 24px 32px", gap: 14, overflow: "hidden" }}>
+            <p className="font-bold" style={{ fontFamily: "'Alegreya', serif", color: "#EAE2D2", fontSize: 16, letterSpacing: 2, margin: 0 }}>{"NUESTRO PARQUE"}</p>
+            {error ? (
+              <p style={{ color: "#EAE2D2", fontSize: 14, margin: 0 }}>No se pudo cargar el contenido.</p>
+            ) : data?.texto_nuestro_parque ? (
+              <div
+                className="flex flex-col"
+                style={{ color: "#EAE2D2", fontSize: 14, lineHeight: 1.7, gap: 10 }}
+                dangerouslySetInnerHTML={{ __html: data.texto_nuestro_parque }}
+              />
+            ) : (
+              <div className="flex flex-col" style={{ color: "#EAE2D2", fontSize: 14, lineHeight: 1.7, gap: 10 }}>
                 <p style={{ margin: 0 }}>Rodeados por una Naturaleza en su máximo esplendor, despedir, recordar y sentir en un entorno de belleza, paz y armonía.</p>
                 <p style={{ margin: 0 }}>Amplios prados verdes, grandes canteros de flores, lugares que favorecen la reflexión en contacto con la naturaleza, basándonos en el concepto de religar al hombre con sus tradiciones.</p>
               </div>
-            </div>
-            <img src="/assets/pastilla-nuestro-parque.png" alt="" className="block" style={{ position: "absolute", right: "clamp(12px, 3vw, 32px)", top: "50%", transform: "translateY(-50%)", height: "clamp(340px, 40vw, 460px)", width: "auto", maxWidth: "44%", objectFit: "contain", zIndex: 1 }} />
-          </div>
-          <div className="flex md:hidden flex-col items-center text-center" style={{ background: "#2C4A34", borderRadius: 32, padding: "28px 24px 32px", gap: 14, overflow: "hidden" }}>
-            <p className="font-bold" style={{ fontFamily: "'Alegreya', serif", color: "#EAE2D2", fontSize: 16, letterSpacing: 2, margin: 0 }}>NUESTRO PARQUE</p>
-            <div className="flex flex-col" style={{ color: "#EAE2D2", fontSize: 14, lineHeight: 1.7, gap: 10 }}>
-              <p style={{ margin: 0 }}>Rodeados por una Naturaleza en su máximo esplendor, despedir, recordar y sentir en un entorno de belleza, paz y armonía.</p>
-              <p style={{ margin: 0 }}>Amplios prados verdes, grandes canteros de flores, lugares que favorecen la reflexión en contacto con la naturaleza, basándonos en el concepto de religar al hombre con sus tradiciones.</p>
-            </div>
-            <img src="/assets/pastilla-nuestro-parque.png" alt="" className="block" style={{ width: "100%", maxWidth: 260, height: "auto", objectFit: "contain", marginTop: 6 }} />
+            )}
+            <img src={"/assets/pastilla-nuestro-parque.png"} alt="" className="block" style={{ width: "100%", maxWidth: 260, height: "auto", objectFit: "contain", marginTop: 6 }} />
           </div>
         </section>
 

@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import ContactForm from "@/components/ContactForm";
 import ImageSlider from "@/components/ImageSlider";
+import { WP_API_URL, type NosotrosData } from "@/lib/wordpress";
 
 const homeSlides = [
   { src: "/assets/hero-monument.jpg", alt: "Parque de Descanso" },
@@ -14,7 +15,20 @@ const homeSlides = [
   { src: "/assets/park-5.jpg", alt: "Parque de Descanso" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  let nosotros: NosotrosData | null = null;
+  let nosotrosError: string | null = null;
+
+  try {
+    const res = await fetch(`${WP_API_URL}/inicio?slug=ajustes-inicio`, {
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    nosotros = (await res.json())[0];
+  } catch (err) {
+    nosotrosError = err instanceof Error ? err.message : "Error desconocido";
+  }
+
   return (
     <div style={{ fontFamily: "'Alegreya', serif", background: "#EEE8DC", minHeight: "100vh" }}>
       <Header />
@@ -206,48 +220,70 @@ export default function Home() {
             >
               NOSOTROS
             </h2>
-            <div
-              className="flex flex-col"
-              style={{
-                color: "#26261F",
-                fontSize: "clamp(14px, 1.4vw, 16px)",
-                lineHeight: 1.2,
-                gap: 14,
-              }}
-            >
-              <p style={{ margin: 0 }}>
-                Nos ocupamos de sus necesidades e inquietudes con un grupo de
-                asesores altamente capacitados, que lo van a acompañar en la
-                toma de la decisión.
+            {nosotrosError ? (
+              <p style={{ color: "#26261F", fontSize: 14, margin: 0 }}>
+                No se pudo cargar el contenido en este momento.
               </p>
-              <p style={{ margin: 0 }}>
-                Amplios prados verdes, grandes canteros de flores, lugares que
-                favorecen la reflexión en contacto con la naturaleza, basándonos
-                en el concepto de religar al hombre con sus tradiciones.
-              </p>
-              <p style={{ margin: 0 }}>
-                El predio está dividido en 47 sectores distribuidos en el Parque
-                Este y el Parque Oeste; han sido diseñados por ingenieros
-                agrónomos y paisajistas que eligen las especies forestales y
-                arbustos ornamentales más adecuados a nuestro clima.
-              </p>
-              <p style={{ margin: 0 }}>
-                Los modernos sistemas de riego hacen posible el mantenimiento
-                de estos, como así también del césped que se resiembra
-                anualmente.
-              </p>
-              <p style={{ margin: 0 }}>
-                Ahora, contamos con servicio de Cremación, innovamos en
-                tecnología para mejorar nuestras prestaciones, una opción digna
-                que permitirá la decisión correcta para una emotiva despedida.
-              </p>
-              <p style={{ margin: 0 }}>
-                Respeto y transparencia en la atención de nuestros servicios.
-              </p>
-              <p style={{ fontSize: "1.2em", margin: 0, fontStyle: "italic", color: "#4B6B45" }}>
-                <strong>Estamos para asesorar, ayudar y acompañar.</strong>
-              </p>
-            </div>
+            ) : nosotros?.texto_nosotros ? (
+              <>
+                <div
+                  className="flex flex-col"
+                  style={{
+                    color: "#26261F",
+                    fontSize: "clamp(14px, 1.4vw, 16px)",
+                    lineHeight: 1.2,
+                    gap: 14,
+                  }}
+                  dangerouslySetInnerHTML={{ __html: nosotros.texto_nosotros }}
+                />
+                <p style={{ fontSize: "1.2em", margin: 0, fontStyle: "italic", color: "#4B6B45" }}>
+                  <strong>{nosotros.frase_final_nosotros}</strong>
+                </p>
+              </>
+            ) : (
+              <div
+                className="flex flex-col"
+                style={{
+                  color: "#26261F",
+                  fontSize: "clamp(14px, 1.4vw, 16px)",
+                  lineHeight: 1.2,
+                  gap: 14,
+                }}
+              >
+                <p style={{ margin: 0 }}>
+                  Nos ocupamos de sus necesidades e inquietudes con un grupo de
+                  asesores altamente capacitados, que lo van a acompañar en la
+                  toma de la decisión.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Amplios prados verdes, grandes canteros de flores, lugares que
+                  favorecen la reflexión en contacto con la naturaleza, basándonos
+                  en el concepto de religar al hombre con sus tradiciones.
+                </p>
+                <p style={{ margin: 0 }}>
+                  El predio está dividido en 47 sectores distribuidos en el Parque
+                  Este y el Parque Oeste; han sido diseñados por ingenieros
+                  agrónomos y paisajistas que eligen las especies forestales y
+                  arbustos ornamentales más adecuados a nuestro clima.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Los modernos sistemas de riego hacen posible el mantenimiento
+                  de estos, como así también del césped que se resiembra
+                  anualmente.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Ahora, contamos con servicio de Cremación, innovamos en
+                  tecnología para mejorar nuestras prestaciones, una opción digna
+                  que permitirá la decisión correcta para una emotiva despedida.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Respeto y transparencia en la atención de nuestros servicios.
+                </p>
+                <p style={{ fontSize: "1.2em", margin: 0, fontStyle: "italic", color: "#4B6B45" }}>
+                  <strong>Estamos para asesorar, ayudar y acompañar.</strong>
+                </p>
+              </div>
+            )}
           </div>
         </section>
 
