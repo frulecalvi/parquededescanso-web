@@ -20,3 +20,15 @@ export interface WpPost {
     }>;
   };
 }
+
+export interface Obituario {
+  id?: number;
+  nombre: string;
+  fecha: string;
+  hora: string;
+  sector: string;
+  fraccion: string;
+  parcela: string;
+  cocheria: string;
+  inhumacion_cremacion: string;
+}
