@@ -2,7 +2,7 @@ services:
   wordpress:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.wordpress
     restart: always
     ports:
       - ${WORDPRESS_PORT}:80
@@ -34,15 +34,11 @@ services:
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.front
     restart: always
     ports:
       - ${FRONTEND_PORT}:3000
-    volumes:
-      - ./frontend:/app:z
-      - frontend_node_modules:/app/node_modules
-      - frontend_next:/app/.next
     depends_on:
       - wordpress
     networks:
@@ -51,8 +47,6 @@ services:
 volumes:
   wordpress:
   db:
-  frontend_node_modules:
-  frontend_next:
 
 networks:
   network:

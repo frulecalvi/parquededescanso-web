@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.front.dev
+    volumes:
+      - ./frontend:/app:z
+      - frontend_node_modules:/app/node_modules
+      - frontend_next:/app/.next
+
+volumes:
+  frontend_node_modules:
+  frontend_next:
