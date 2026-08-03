@@ -105,8 +105,7 @@ export default function Footer() {
           color: "#cdd6c8",
         }}
       >
-        © 2022 Todos los derechos reservados Parque de Descanso Av Colón 593
-        Ciudad Mendoza
+        © 2026 Todos los derechos reservados - Parque de Descanso
       </div>
     </footer>
   );

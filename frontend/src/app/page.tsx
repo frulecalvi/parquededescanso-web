@@ -25,7 +25,7 @@ export default function Home() {
           style={{ maxWidth: 900, paddingTop: "clamp(32px, 6vw, 64px)" }}
         >
           <img
-            src="/assets/logo-full-green.svg"
+            src="/assets/logo-full-green.png"
             alt="Parque de Descanso"
             className="mx-auto block"
             style={{
@@ -50,6 +50,7 @@ export default function Home() {
           >
             <span aria-hidden="true">☎</span> LLAMAR A URGENCIAS FÚNEBRES
           </a>
+          <p style={{ color: "rgb(75, 107, 69)", paddingTop: "2em" }}>Empresa Fúnebre • Cementerio Parque • Cremaciones • Salas Velatorias</p>
         </section>
 
         <ImageSlider slides={homeSlides} />
@@ -209,7 +210,7 @@ export default function Home() {
               style={{
                 color: "#26261F",
                 fontSize: "clamp(14px, 1.4vw, 16px)",
-                lineHeight: 1.8,
+                lineHeight: 1.2,
                 gap: 14,
               }}
             >
@@ -243,7 +244,7 @@ export default function Home() {
                 Respeto y transparencia en la atención de nuestros servicios.
               </p>
               <p style={{ fontSize: "1.2em", margin: 0, fontStyle: "italic", color: "#4B6B45" }}>
-                Estamos para asesorar, ayudar y acompañar.
+                <strong>Estamos para asesorar, ayudar y acompañar.</strong>
               </p>
             </div>
           </div>

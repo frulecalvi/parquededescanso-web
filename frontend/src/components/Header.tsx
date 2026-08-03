@@ -74,7 +74,7 @@ export default function Header() {
         >
           <Link href="/" className="flex items-center">
             <img
-              src="/assets/logo-icon-light.svg"
+              src="/assets/logo-icon-light.png"
               alt="Parque de Descanso"
               style={{ height: 32, width: "auto", display: "block" }}
             />
@@ -122,7 +122,7 @@ export default function Header() {
         >
           <Link href="/" className="flex items-center">
             <img
-              src="/assets/logo-icon-light.svg"
+              src="/assets/logo-icon-light.png"
               alt="Parque de Descanso"
               style={{ height: 32, width: "auto", display: "block" }}
             />

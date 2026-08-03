@@ -104,7 +104,7 @@ export default function Servicios() {
                     fontFamily: "'Alegreya', serif",
                     fontWeight: 700,
                     color: "#2C4A34",
-                    fontSize: "clamp(14px, 1.6vw, 16px)",
+                    fontSize: "clamp(16px, 1.8vw, 18px)",
                     cursor: "pointer",
                     touchAction: "manipulation",
                     WebkitTapHighlightColor: "transparent",
@@ -117,11 +117,11 @@ export default function Servicios() {
                   />
                 </label>
                 <p
-                  className="faq-answer italic"
+                  className="faq-answer"
                   style={{
                     color: "#4B6B45",
-                    fontSize: "clamp(13px, 1.5vw, 15px)",
-                    lineHeight: 1.7,
+                    fontSize: "clamp(16px, 1.8vw, 18px)",
+                    lineHeight: 1.2,
                   }}
                 >
                   {item.a}

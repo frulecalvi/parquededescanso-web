@@ -57,22 +57,22 @@ export default function NuestroParque() {
             </div>
             <div className="flex flex-col" style={{ flex: "0 1 auto", gap: 16, fontFamily: "'Alegreya', serif", color: "#2C4A34", fontSize: "clamp(13px, 1.4vw, 15px)", letterSpacing: 1, maxWidth: "100%" }}>
               <div className="flex items-baseline" style={{ gap: 10 }}>
-                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>1</span> INGRESO POR ACCESO ESTE.
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 32, height: 32, fontSize: 18 }}>1</span> INGRESO POR ACCESO ESTE.
               </div>
               <div className="flex items-baseline" style={{ gap: 10 }}>
-                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>2 3</span> ACCESOS AL PARQUE.
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 32, height: 32, fontSize: 18 }}>2 3</span> ACCESOS AL PARQUE.
               </div>
               <div className="flex items-baseline" style={{ gap: 10 }}>
-                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>4</span> OFICINAS ADMINISTRATIVAS.
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 32, height: 32, fontSize: 18 }}>4</span> OFICINAS ADMINISTRATIVAS.
               </div>
               <div className="flex items-baseline" style={{ gap: 10 }}>
-                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>5</span> CAPILLA DEL PARQUE.
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 32, height: 32, fontSize: 18 }}>5</span> CAPILLA DEL PARQUE.
               </div>
               <div className="flex items-baseline" style={{ gap: 10 }}>
-                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>6</span> SALAS VELATORIAS.
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 32, height: 32, fontSize: 18 }}>6</span> SALAS VELATORIAS.
               </div>
               <div className="flex items-baseline" style={{ gap: 10 }}>
-                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>7</span> CREMATORIO.
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 32, height: 32, fontSize: 18 }}>7</span> CREMATORIO.
               </div>
             </div>
           </div>

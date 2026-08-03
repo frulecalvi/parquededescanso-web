@@ -33,19 +33,19 @@ export default function ContactSection() {
             style={{ gap: 14, color: "#26261F", fontSize: 15 }}
           >
             <div className="flex items-center" style={{ gap: 10 }}>
-              <span style={{ color: "#4B6B45" }}>☎</span> Of. Cementerio Parque{" "}
+              <img src="/assets/contacto-telefono.svg" alt="" style={{ height: 20, width: "auto", display: "block" }} /> Of. Cementerio Parque{" "}
               <strong>(261) 491-0279 / 491-2865</strong>
             </div>
             <div className="flex items-center" style={{ gap: 10 }}>
-              <span style={{ color: "#4B6B45" }}>☎</span> Of. Centro{" "}
+              <img src="/assets/contacto-telefono.svg" alt="" style={{ height: 20, width: "auto", display: "block" }} /> Of. Centro{" "}
               <strong>(261) 421-6922 / 421-6516</strong>
             </div>
             <div className="flex items-center" style={{ gap: 10 }}>
-              <span style={{ color: "#4B6B45" }}>☏</span> Of. Centro WhatsApp{" "}
+              <img src="/assets/contacto-whatsapp.svg" alt="" style={{ height: 20, width: "auto", display: "block" }} /> Of. Centro WhatsApp{" "}
               <strong>2615561461</strong>
             </div>
             <div className="flex items-center" style={{ gap: 10 }}>
-              <span style={{ color: "#4B6B45" }}>☎</span> URGENCIAS FÚNEBRES{" "}
+              <img src="/assets/contacto-telefono.svg" alt="" style={{ height: 20, width: "auto", display: "block" }} /> URGENCIAS FÚNEBRES{" "}
               <strong>261 4 700 700</strong>
             </div>
           </div>
