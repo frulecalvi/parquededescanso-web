@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface Slide {
   src: string;
@@ -12,91 +12,113 @@ interface ImageSliderProps {
 }
 
 export default function ImageSlider({ slides }: ImageSliderProps) {
-  const [slide, setSlide] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
+  // Auto-play nativo
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 860px)");
-    const updateMq = () => setIsMobile(mq.matches);
-    updateMq();
-    mq.addEventListener("change", updateMq);
-
     const timer = setInterval(() => {
-      setSlide((s) => (s + 1) % slides.length);
+      const radios = Array.from(
+        document.querySelectorAll<HTMLInputElement>('input[name="slider"]')
+      );
+      if (radios.length === 0) return;
+      const current = radios.findIndex((r) => r.checked);
+      const next = (current + 1) % radios.length;
+      radios[next].checked = true;
     }, 5500);
-
-    return () => {
-      mq.removeEventListener("change", updateMq);
-      clearInterval(timer);
-    };
+    return () => clearInterval(timer);
   }, [slides.length]);
 
-  const goNext = () => setSlide((s) => (s + 1) % slides.length);
-  const goPrev = () =>
-    setSlide((s) => (s - 1 + slides.length) % slides.length);
+  const cssRules = slides
+    .map((_, i) => {
+      const prev = (i - 1 + slides.length) % slides.length;
+      const next = (i + 1) % slides.length;
+      return `
+        #slide-${i}:checked ~ .slider-nav .nav-prev-${i},
+        #slide-${i}:checked ~ .slider-nav .nav-next-${i} { display: flex !important; }
+      `;
+    })
+    .join("\n");
 
   return (
     <section
       className="mx-auto px-6"
-      style={{
-        maxWidth: 1300,
-        marginTop: "clamp(24px, 4vw, 40px)",
-      }}
+      style={{ maxWidth: 1300, marginTop: "clamp(24px, 4vw, 40px)" }}
     >
       <div
         className="relative overflow-hidden bg-neutral-300"
-        style={{
-          borderRadius: isMobile ? 20 : 28,
-          aspectRatio: "16/8",
-        }}
+        style={{ borderRadius: "clamp(20px, 2vw, 28px)", aspectRatio: "16/8" }}
       >
-        {slides.map((s, i) => (
-          <img
-            key={s.src}
-            src={s.src}
-            alt={s.alt || ""}
-            className="absolute inset-0 w-full h-full"
-            style={{
-              objectFit: "cover",
-              opacity: i === slide ? 1 : 0,
-              transition: "opacity 0.9s ease",
-            }}
-          />
-        ))}
-        <button
-          onClick={goPrev}
-          aria-label="Anterior"
-          className="absolute top-1/2 flex items-center justify-center border-none cursor-pointer"
-          style={{
-            left: 14,
-            transform: "translateY(-50%)",
-            background: "rgba(0,0,0,0.25)",
-            color: "#fff",
-            width: isMobile ? 36 : 40,
-            height: isMobile ? 36 : 40,
-            borderRadius: "50%",
-            fontSize: isMobile ? 20 : 22,
-          }}
-        >
-          ‹
-        </button>
-        <button
-          onClick={goNext}
-          aria-label="Siguiente"
-          className="absolute top-1/2 flex items-center justify-center border-none cursor-pointer"
-          style={{
-            right: 14,
-            transform: "translateY(-50%)",
-            background: "rgba(0,0,0,0.25)",
-            color: "#fff",
-            width: isMobile ? 36 : 40,
-            height: isMobile ? 36 : 40,
-            borderRadius: "50%",
-            fontSize: isMobile ? 20 : 22,
-          }}
-        >
-          ›
-        </button>
+        <style>{`
+          .slide-item {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.9s ease;
+          }
+          input[name="slider"]:checked + .slide-item { opacity: 1; }
+          .slider-nav label {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.25);
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            width: clamp(36px, 5vw, 40px);
+            height: clamp(36px, 5vw, 40px);
+            font-size: clamp(20px, 2.5vw, 22px);
+          }
+          ${cssRules}
+        `}</style>
+
+        {slides.flatMap((s, i) => [
+          <input
+            key={`radio-${i}`}
+            type="radio"
+            name="slider"
+            id={`slide-${i}`}
+            className="sr-only"
+            defaultChecked={i === 0}
+          />,
+          <div key={`item-${i}`} className="slide-item">
+            <img
+              src={s.src}
+              alt={s.alt || ""}
+              className="w-full h-full"
+              style={{ objectFit: "cover", display: "block" }}
+            />
+          </div>,
+        ])}
+
+        <div className="slider-nav">
+          {slides.map((_, i) => {
+            const prev = (i - 1 + slides.length) % slides.length;
+            const next = (i + 1) % slides.length;
+            return (
+              <span key={i}>
+                <label
+                  htmlFor={`slide-${prev}`}
+                  className={`nav-prev-${i}`}
+                  aria-label="Anterior"
+                  style={{ left: 14 }}
+                >
+                  ‹
+                </label>
+                <label
+                  htmlFor={`slide-${next}`}
+                  className={`nav-next-${i}`}
+                  aria-label="Siguiente"
+                  style={{ right: 14 }}
+                >
+                  ›
+                </label>
+              </span>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

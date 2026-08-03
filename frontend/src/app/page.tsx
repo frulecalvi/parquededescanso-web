@@ -193,7 +193,7 @@ export default function Home() {
           </div>
           <div style={{ flex: "2 1 420px" }}>
             <h2
-              className="font-normal"
+              className="font-normal text-center lg:text-left"
               style={{
                 fontFamily: "'Alegreya', serif",
                 letterSpacing: 4,
@@ -242,7 +242,7 @@ export default function Home() {
               <p style={{ margin: 0 }}>
                 Respeto y transparencia en la atención de nuestros servicios.
               </p>
-              <p style={{ margin: 0, fontStyle: "italic", color: "#4B6B45" }}>
+              <p style={{ fontSize: "1.2em", margin: 0, fontStyle: "italic", color: "#4B6B45" }}>
                 Estamos para asesorar, ayudar y acompañar.
               </p>
             </div>

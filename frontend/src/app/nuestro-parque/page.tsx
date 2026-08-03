@@ -29,7 +29,7 @@ export default function NuestroParque() {
 
         <section className="mx-auto px-6" style={{ maxWidth: 1000, marginTop: "clamp(40px, 6vw, 56px)" }}>
           <div className="hidden md:flex items-center relative overflow-visible" style={{ background: "#2C4A34", borderRadius: 40, padding: "clamp(20px, 2.2vw, 26px) clamp(28px, 4vw, 40px)", minHeight: "clamp(190px, 19vw, 230px)" }}>
-            <div style={{ flex: "0 1 54%", maxWidth: "54%", paddingRight: "clamp(140px, 20vw, 220px)", position: "relative", zIndex: 2 }}>
+            <div style={{ flex: "0 1 54%", maxWidth: "54%", position: "relative", zIndex: 2 }}>
               <p className="font-bold" style={{ fontFamily: "'Alegreya', serif", color: "#EAE2D2", fontSize: "clamp(14px, 1.8vw, 17px)", letterSpacing: 2, margin: "0 0 14px" }}>
                 NUESTRO PARQUE
               </p>
@@ -50,28 +50,30 @@ export default function NuestroParque() {
           </div>
         </section>
 
-        <section className="mx-auto flex flex-wrap items-center px-6" style={{ maxWidth: 1100, marginTop: "clamp(48px, 7vw, 72px)", gap: "clamp(28px, 4vw, 48px)" }}>
-          <div className="mx-auto" style={{ flex: "1 1 320px", maxWidth: 420 }}>
-            <img src="/assets/mapa-final.png" alt="Mapa de sectores" className="block w-full h-auto" />
-          </div>
-          <div className="flex flex-col" style={{ flex: "1 1 280px", gap: 16, fontFamily: "'Alegreya', serif", color: "#2C4A34", fontSize: "clamp(13px, 1.4vw, 15px)", letterSpacing: 1 }}>
-            <div className="flex items-baseline" style={{ gap: 10 }}>
-              <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>1</span> INGRESO POR ACCESO ESTE.
+        <section className="mx-auto px-6" style={{ maxWidth: 1100, marginTop: "clamp(48px, 7vw, 72px)" }}>
+          <div className="flex flex-col md:flex-row items-center justify-center" style={{ gap: "clamp(28px, 4vw, 48px)" }}>
+            <div style={{ flex: "0 1 auto", maxWidth: 420, width: "100%" }}>
+              <img src="/assets/mapa-final.png" alt="Mapa de sectores" className="block w-full h-auto" />
             </div>
-            <div className="flex items-baseline" style={{ gap: 10 }}>
-              <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>2 3</span> ACCESOS AL PARQUE.
-            </div>
-            <div className="flex items-baseline" style={{ gap: 10 }}>
-              <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>4</span> OFICINAS ADMINISTRATIVAS.
-            </div>
-            <div className="flex items-baseline" style={{ gap: 10 }}>
-              <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>5</span> CAPILLA DEL PARQUE.
-            </div>
-            <div className="flex items-baseline" style={{ gap: 10 }}>
-              <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>6</span> SALAS VELATORIAS.
-            </div>
-            <div className="flex items-baseline" style={{ gap: 10 }}>
-              <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>7</span> CREMATORIO.
+            <div className="flex flex-col" style={{ flex: "0 1 auto", gap: 16, fontFamily: "'Alegreya', serif", color: "#2C4A34", fontSize: "clamp(13px, 1.4vw, 15px)", letterSpacing: 1, maxWidth: "100%" }}>
+              <div className="flex items-baseline" style={{ gap: 10 }}>
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>1</span> INGRESO POR ACCESO ESTE.
+              </div>
+              <div className="flex items-baseline" style={{ gap: 10 }}>
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>2 3</span> ACCESOS AL PARQUE.
+              </div>
+              <div className="flex items-baseline" style={{ gap: 10 }}>
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>4</span> OFICINAS ADMINISTRATIVAS.
+              </div>
+              <div className="flex items-baseline" style={{ gap: 10 }}>
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>5</span> CAPILLA DEL PARQUE.
+              </div>
+              <div className="flex items-baseline" style={{ gap: 10 }}>
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>6</span> SALAS VELATORIAS.
+              </div>
+              <div className="flex items-baseline" style={{ gap: 10 }}>
+                <span className="inline-flex items-center justify-center flex-shrink-0" style={{ border: "1px solid #4B6B45", borderRadius: "50%", width: 22, height: 22, fontSize: 12 }}>7</span> CREMATORIO.
+              </div>
             </div>
           </div>
         </section>

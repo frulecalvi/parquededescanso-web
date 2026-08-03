@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
@@ -24,8 +21,6 @@ const FAQ = [
 ];
 
 export default function Servicios() {
-  const [openIndex, setOpenIndex] = useState<number>(-1);
-
   return (
     <div style={{ fontFamily: "'Alegreya', serif", background: "#EEE8DC", minHeight: "100vh" }}>
       <Header />
@@ -38,7 +33,7 @@ export default function Servicios() {
 
         <section className="mx-auto px-6" style={{ maxWidth: 1000, marginTop: "clamp(32px, 5vw, 48px)" }}>
           <div className="hidden md:flex items-center relative overflow-visible" style={{ background: "#2C4A34", borderRadius: 40, padding: "clamp(20px, 2.2vw, 26px) clamp(28px, 4vw, 40px)", minHeight: "clamp(190px, 19vw, 230px)" }}>
-            <div style={{ flex: "0 1 54%", maxWidth: "54%", paddingRight: "clamp(140px, 20vw, 220px)", position: "relative", zIndex: 2 }}>
+            <div style={{ flex: "0 1 54%", maxWidth: "54%", position: "relative", zIndex: 2 }}>
               <p className="italic font-semibold" style={{ fontFamily: "'Alegreya', serif", color: "#EAE2D2", fontSize: "clamp(15px, 1.8vw, 18px)", lineHeight: 1.4, margin: "0 0 14px" }}>
                 Asesoramiento las 24hs para adquisición de Parcelas, Cremaciones y Servicios de Sepelio.
               </p>
@@ -86,28 +81,53 @@ export default function Servicios() {
           <h2 className="font-bold underline" style={{ fontFamily: "'Alegreya', serif", color: "#2C4A34", fontSize: "clamp(20px, 2.4vw, 26px)", letterSpacing: 1, textUnderlineOffset: 8, margin: "0 0 24px" }}>
             PREGUNTAS FRECUENTES
           </h2>
+
+          <style>{`
+            .faq-answer { display: none; }
+            .faq-toggle::after { content: "+"; }
+            .faq-item input:checked ~ .faq-answer { display: block; margin-top: 10px; }
+            .faq-item input:checked ~ .faq-question .faq-toggle::after { content: "−"; }
+          `}</style>
+
           <div className="flex flex-col">
-            {FAQ.map((item, i) => {
-              const open = openIndex === i;
-              return (
-                <div key={i} style={{ borderBottom: "1px solid rgba(75,107,69,0.25)", padding: "14px 0" }}>
-                  <button
-                    type="button"
-                    onClick={() => setOpenIndex(open ? -1 : i)}
-                    className="w-full text-left bg-transparent border-none cursor-pointer flex items-baseline justify-between"
-                    style={{ gap: 12, fontFamily: "'Alegreya', serif", fontWeight: 700, color: "#2C4A34", fontSize: "clamp(14px, 1.6vw, 16px)" }}
-                  >
-                    <span>{i + 1}. {item.q}</span>
-                    <span className="flex-shrink-0" style={{ color: "#4B6B45", fontSize: 18 }}>{open ? "−" : "+"}</span>
-                  </button>
-                  {open && (
-                    <p className="italic" style={{ margin: "10px 0 0", color: "#4B6B45", fontSize: "clamp(13px, 1.5vw, 15px)", lineHeight: 1.7 }}>
-                      {item.a}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
+            {FAQ.map((item, i) => (
+              <div key={i} className="faq-item" style={{ borderBottom: "1px solid rgba(75,107,69,0.25)", padding: "14px 0" }}>
+                <input type="checkbox" id={`faq-${i}`} className="sr-only" />
+                <label
+                  htmlFor={`faq-${i}`}
+                  className="faq-question"
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    justifyContent: "space-between",
+                    gap: 12,
+                    fontFamily: "'Alegreya', serif",
+                    fontWeight: 700,
+                    color: "#2C4A34",
+                    fontSize: "clamp(14px, 1.6vw, 16px)",
+                    cursor: "pointer",
+                    touchAction: "manipulation",
+                    WebkitTapHighlightColor: "transparent",
+                  }}
+                >
+                  <span>{i + 1}. {item.q}</span>
+                  <span
+                    className="faq-toggle flex-shrink-0"
+                    style={{ color: "#4B6B45", fontSize: 18 }}
+                  />
+                </label>
+                <p
+                  className="faq-answer italic"
+                  style={{
+                    color: "#4B6B45",
+                    fontSize: "clamp(13px, 1.5vw, 15px)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {item.a}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 

@@ -17,7 +17,7 @@ export default function Header() {
   const menuRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
 
-  // Cerrar menú al navegar
+  // Cerrar al navegar
   useEffect(() => {
     if (menuRef.current) menuRef.current.checked = false;
   }, [pathname]);
@@ -33,19 +33,34 @@ export default function Header() {
 
   return (
     <>
+      {/* CSS puro: cuando el checkbox está marcado, muestra el overlay y bloquea scroll */}
       <style>{`
-        #menu-toggle:checked ~ .mobile-menu-overlay {
+        body:has(#menu-toggle:checked) {
+          overflow: hidden;
+        }
+        body:has(#menu-toggle:checked) .mobile-menu-overlay {
           display: flex !important;
         }
       `}</style>
 
-      {/* Checkbox hack para menú mobile */}
+      {/* Checkbox siempre en top:0 para que focus no cause scroll hacia arriba */}
       <input
         type="checkbox"
         id="menu-toggle"
         ref={menuRef}
-        className="sr-only"
         aria-label="Abrir o cerrar menú"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          opacity: 0,
+          width: 1,
+          height: 1,
+          border: "none",
+          padding: 0,
+          margin: 0,
+          pointerEvents: "none",
+        }}
       />
 
       {/* ═══ MOBILE HEADER ═══ */}
@@ -140,15 +155,13 @@ export default function Header() {
         </div>
       </header>
 
-      {/* ═══ MOBILE MENU OVERLAY (controlado por checkbox) ═══ */}
+      {/* ═══ MOBILE MENU OVERLAY ═══ */}
       <div
         className="mobile-menu-overlay fixed top-0 left-0 z-50 flex-col"
         style={{
           background: "#2C4A34",
           width: "100%",
           height: "100%",
-          minHeight: "100dvh",
-          overflow: "hidden",
           display: "none",
         }}
       >
@@ -166,6 +179,7 @@ export default function Header() {
               minWidth: 44,
               userSelect: "none",
             }}
+            aria-label="Cerrar menú"
           >
             ×
           </label>

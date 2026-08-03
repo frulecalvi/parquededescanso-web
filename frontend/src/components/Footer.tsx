@@ -33,20 +33,22 @@ export default function Footer() {
           <p style={{ margin: "0 0 10px" }}>
             Chacón s/n – Rodeo de la Cruz – Guaymallén, Mendoza.
           </p>
-          <p style={{ margin: "0 0 2px" }}>Horarios para visitas:</p>
+          <p style={{ margin: "0 0 2px" }}>
+            <strong>Horarios para visitas:</strong>
+          </p>
           <p style={{ margin: "0 0 10px" }}>
             Lunes a Domingos de 09:00 a 18:00 hs.
             <br />
             Los portones del Parque se cierran a las 17.30hs.
           </p>
           <p style={{ margin: "0 0 2px" }}>
-            Horarios para visitas 24/12, 25/12, 31/12 y 01/01:
+            <strong>Horarios para visitas 24/12, 25/12, 31/12 y 01/01:</strong>
           </p>
           <p style={{ margin: "0 0 10px" }}>
             De 09:00 a 17:00 hs. Los portones se cierran a las 16.30hs.
           </p>
           <p style={{ margin: "0 0 2px" }}>
-            Horarios de Oficinas de Administración en Parque:
+            <strong>Horarios de Oficinas de Administración en Parque:</strong>
           </p>
           <p style={{ margin: 0 }}>
             Lunes a Viernes de 9:00 a 18:00 hs. Sábados, Domingos y Feriados de
@@ -69,7 +71,9 @@ export default function Footer() {
             <br />
             Colón 593, esq. 25 de Mayo (C.P 5500) Ciudad, Mendoza.
           </p>
-          <p style={{ margin: "0 0 2px" }}>Horarios de atención:</p>
+          <p style={{ margin: "0 0 2px" }}>
+            <strong>Horarios de atención:</strong>
+          </p>
           <p style={{ margin: "0 0 18px" }}>
             Lunes a viernes de 8:30 a 18:00 hs.
             <br />
