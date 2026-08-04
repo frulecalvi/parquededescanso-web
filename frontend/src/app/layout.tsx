@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
 
 export const metadata: Metadata = {
   title: "Parque de Descanso",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="min-h-[100dvh]">{children}</body>
+      <body className="min-h-[100dvh]">
+        {children}
+        <WhatsAppFloatingButton />
+      </body>
     </html>
   );
 }
