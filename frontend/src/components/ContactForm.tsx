@@ -1,6 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
+import Script from "next/script";
+
+declare global {
+  interface Window {
+    turnstile: {
+      render: (container: string | HTMLElement, options: Record<string, unknown>) => string;
+      reset: (widgetIdOrContainer?: string | HTMLElement) => void;
+    };
+  }
+}
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -13,6 +23,34 @@ export default function ContactForm() {
     telefono: "",
     mensaje: "",
   });
+  const turnstileToken = useRef("");
+  const turnstileRef = useRef<HTMLDivElement>(null);
+
+  const resetTurnstile = useCallback(() => {
+    if (window.turnstile && turnstileRef.current) {
+      window.turnstile.reset(turnstileRef.current);
+    }
+    turnstileToken.current = "";
+  }, []);
+
+  const handleTurnstileLoad = useCallback(() => {
+    if (turnstileRef.current && window.turnstile) {
+      window.turnstile.render(turnstileRef.current, {
+        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "",
+        action: "turnstile-spin-v2",
+        theme: "light",
+        callback: (token: string) => {
+          turnstileToken.current = token;
+        },
+        "error-callback": () => {
+          turnstileToken.current = "";
+        },
+        "expired-callback": () => {
+          turnstileToken.current = "";
+        },
+      });
+    }
+  }, []);
 
   if (sent) {
     return (
@@ -42,6 +80,10 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken.current) {
+      setError("Por favor, completá la verificación de seguridad.");
+      return;
+    }
     setLoading(true);
     setError("");
 
@@ -49,7 +91,10 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          "cf-turnstile-response": turnstileToken.current,
+        }),
       });
 
       if (!res.ok) {
@@ -60,6 +105,7 @@ export default function ContactForm() {
       setSent(true);
     } catch (err: any) {
       setError(err.message || "Error al enviar la consulta");
+      resetTurnstile();
     } finally {
       setLoading(false);
     }
@@ -70,6 +116,11 @@ export default function ContactForm() {
       className="mx-auto px-6"
       style={{ maxWidth: 1100, marginTop: "clamp(48px, 7vw, 72px)" }}
     >
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="lazyOnload"
+        onLoad={handleTurnstileLoad}
+      />
       <h2
         className="font-bold underline"
         style={{
@@ -173,28 +224,44 @@ export default function ContactForm() {
             resize: "vertical",
           }}
         />
-        {error && (
-          <p style={{ color: "#a94442", fontSize: 14 }}>{error}</p>
-        )}
-        <button
-          type="submit"
-          disabled={loading}
-          className="border-none cursor-pointer"
+        <div
+          className="flex flex-wrap"
           style={{
-            alignSelf: "flex-start",
-            fontFamily: "'Alegreya', serif",
-            fontWeight: 700,
-            fontSize: 13,
-            letterSpacing: 1,
-            color: "#EEE8DC",
-            background: loading ? "#5a7a64" : "#2C4A34",
-            borderRadius: 9999,
-            padding: "13px 32px",
-            opacity: loading ? 0.7 : 1,
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 16,
           }}
         >
-          {loading ? "ENVIANDO..." : "ENVIAR"}
-        </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="border-none cursor-pointer"
+            style={{
+              fontFamily: "'Alegreya', serif",
+              fontWeight: 700,
+              fontSize: 13,
+              letterSpacing: 1,
+              color: "#EEE8DC",
+              background: loading ? "#5a7a64" : "#2C4A34",
+              borderRadius: 9999,
+              padding: "13px 32px",
+              opacity: loading ? 0.7 : 1,
+            }}
+          >
+            {loading ? "ENVIANDO..." : "ENVIAR"}
+          </button>
+          {error && (
+            <p style={{ color: "#a94442", fontSize: 16, margin: 0 }}>
+              {error}
+            </p>
+          )}
+          <div
+            ref={turnstileRef}
+            data-action="turnstile-spin-v2"
+            data-theme="light"
+            style={{ minHeight: 65 }}
+          />
+        </div>
       </form>
     </section>
   );

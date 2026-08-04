@@ -4,7 +4,55 @@ import Mailgun from "mailgun.js";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { nombre, apellido, email, telefono, mensaje } = body;
+    const {
+      nombre,
+      apellido,
+      email,
+      telefono,
+      mensaje,
+      "cf-turnstile-response": token,
+    } = body;
+
+    if (!token) {
+      return Response.json(
+        { error: "Verificación de seguridad requerida" },
+        { status: 400 }
+      );
+    }
+
+    const clientIp =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      request.headers.get("x-real-ip")?.trim() ||
+      "unknown";
+
+    let siteverifyResult;
+    try {
+      const r = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            secret: process.env.TURNSTILE_SECRET || "",
+            response: token,
+            remoteip: clientIp,
+          }),
+        }
+      );
+      if (!r.ok) throw new Error(`siteverify ${r.status}`);
+      siteverifyResult = await r.json();
+    } catch (err) {
+      console.error("Turnstile siteverify error:", err);
+      return Response.json({ error: "forbidden" }, { status: 403 });
+    }
+
+    if (!siteverifyResult.success) {
+      console.error(
+        "Turnstile validation failed:",
+        siteverifyResult["error-codes"]
+      );
+      return Response.json({ error: "forbidden" }, { status: 403 });
+    }
 
     if (!nombre || !apellido || !email || !mensaje) {
       return Response.json(

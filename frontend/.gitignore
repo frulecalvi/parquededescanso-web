@@ -24,7 +24,6 @@ test-results/
 
 # Environment files (avoid leaking secrets into the build context)
 .env
-.env*
 .env.local
 .env.development.local
 .env.test.local
