@@ -13,8 +13,6 @@ services:
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     volumes:
       - wordpress:/usr/src/wordpress
-      - ./plugins/pods:/usr/src/wordpress/wp-content/plugins/pods:z
-      - ./plugins/capability-manager-enhanced:/usr/src/wordpress/wp-content/plugins/capability-manager-enhanced:z
     depends_on:
       - db
     networks:
