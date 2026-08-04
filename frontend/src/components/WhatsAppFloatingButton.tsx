@@ -1,7 +1,7 @@
 export default function WhatsAppFloatingButton() {
   return (
     <a
-      href="https://wa.me/5492615561461"
+      href="https://wa.me/5492615561461?text=Hola%2C%20me%20comunico%20desde%20la%20web%20de%20Parque%20de%20Descanso.%20Tengo%20una%20consulta%3A"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"

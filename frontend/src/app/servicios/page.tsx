@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import ContactForm from "@/components/ContactForm";
+import DropdownPagos from "@/components/DropdownPagos";
 import { WP_API_URL, type ServiciosData, type PreguntaFrecuenteData } from "@/lib/wordpress";
 
 const FAQ_FALLBACK = [
@@ -114,16 +115,30 @@ export default async function Servicios() {
             <p style={{ color: "#26261F", fontSize: 14, lineHeight: 1.6, maxWidth: 520, margin: 0 }}>
               Nuestro equipo de asesores está capacitado para asistirlo en cada consulta que Ud necesite, acompañarlo y guiarlo para que su decisión sea la correcta.
             </p>
-            <a href="#" className="inline-block rounded-full border-none cursor-pointer" style={{ fontFamily: "'Alegreya', serif", fontWeight: 700, fontSize: 12, letterSpacing: 1, color: "#EAE2D2", background: "#2C4A34", padding: "12px 28px", marginTop: 8, textDecoration: "none" }}>
+            <a
+              href="https://wa.me/5492615561461?text=Hola%2C%20quiero%20hablar%20con%20un%20asesor%20sobre%20los%20servicios%20de%20Parque%20de%20Descanso."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-full border-none cursor-pointer"
+              style={{
+                fontFamily: "'Alegreya', serif",
+                fontWeight: 700,
+                fontSize: 12,
+                letterSpacing: 1,
+                color: "#EAE2D2",
+                background: "#2C4A34",
+                padding: "12px 28px",
+                marginTop: 8,
+                textDecoration: "none",
+              }}
+            >
               CLICK AQUÍ
             </a>
           </div>
         </section>
 
         <section className="mx-auto px-6 text-center" style={{ maxWidth: 900, marginTop: "clamp(28px, 4vw, 40px)" }}>
-          <a href="#" className="inline-block rounded-full border-none cursor-pointer" style={{ fontFamily: "'Alegreya', serif", fontWeight: 700, fontSize: "clamp(14px, 1.8vw, 17px)", letterSpacing: 1, color: "#EAE2D2", background: "#2C4A34", padding: "16px 36px", textDecoration: "none" }}>
-            REALIZÁ TUS PAGOS AQUÍ
-          </a>
+          <DropdownPagos />
         </section>
 
         <section className="mx-auto px-6" style={{ maxWidth: 900, marginTop: "clamp(40px, 6vw, 60px)" }}>

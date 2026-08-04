@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import ContactForm from "@/components/ContactForm";
 import ImageSlider from "@/components/ImageSlider";
+import DropdownPagos from "@/components/DropdownPagos";
 import { WP_API_URL, type NosotrosData } from "@/lib/wordpress";
 
 const homeSlides = [
@@ -163,22 +164,7 @@ export default async function Home() {
             >
               LLAMAR A OFICINA DEL PARQUE
             </a>
-            <a
-              href="#"
-              className="inline-block rounded-full border-none cursor-pointer"
-              style={{
-                fontFamily: "'Alegreya', serif",
-                fontWeight: 700,
-                fontSize: 13,
-                letterSpacing: 1,
-                color: "#EEE8DC",
-                background: "#2C4A34",
-                padding: "14px 26px",
-                textDecoration: "none",
-              }}
-            >
-              REALIZÁ TUS PAGOS AQUÍ
-            </a>
+            <DropdownPagos />
           </div>
         </section>
 
@@ -314,7 +300,8 @@ export default async function Home() {
               SERVICIO EXCLUSIVO PARA EMPRESAS FÚNEBRES
             </p>
             <a
-              href="#"
+              href="https://form.jotform.com/231846825393061"
+              target="_blank"
               className="inline-block rounded-full border-none cursor-pointer"
               style={{
                 fontFamily: "'Alegreya', serif",
