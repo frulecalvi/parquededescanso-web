@@ -4,6 +4,8 @@ import { useState } from "react";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     nombre: "",
     apellido: "",
@@ -38,6 +40,31 @@ export default function ContactForm() {
     );
   }
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Error al enviar la consulta");
+      }
+
+      setSent(true);
+    } catch (err: any) {
+      setError(err.message || "Error al enviar la consulta");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       className="mx-auto px-6"
@@ -57,10 +84,7 @@ export default function ContactForm() {
         CONSULTAS:
       </h2>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          setSent(true);
-        }}
+        onSubmit={handleSubmit}
         className="flex flex-col"
         style={{ gap: 16 }}
       >
@@ -70,6 +94,7 @@ export default function ContactForm() {
             onChange={(e) => setForm({ ...form, nombre: e.target.value })}
             placeholder="Nombre"
             className="border-none"
+            required
             style={{
               flex: "1 1 260px",
               background: "#e6ded0",
@@ -85,6 +110,7 @@ export default function ContactForm() {
             onChange={(e) => setForm({ ...form, apellido: e.target.value })}
             placeholder="Apellido"
             className="border-none"
+            required
             style={{
               flex: "1 1 260px",
               background: "#e6ded0",
@@ -103,6 +129,7 @@ export default function ContactForm() {
             placeholder="Email"
             type="email"
             className="border-none"
+            required
             style={{
               flex: "1 1 260px",
               background: "#e6ded0",
@@ -135,6 +162,7 @@ export default function ContactForm() {
           placeholder="Mensaje"
           rows={5}
           className="border-none"
+          required
           style={{
             background: "#e6ded0",
             borderRadius: 8,
@@ -145,8 +173,12 @@ export default function ContactForm() {
             resize: "vertical",
           }}
         />
+        {error && (
+          <p style={{ color: "#a94442", fontSize: 14 }}>{error}</p>
+        )}
         <button
           type="submit"
+          disabled={loading}
           className="border-none cursor-pointer"
           style={{
             alignSelf: "flex-start",
@@ -155,12 +187,13 @@ export default function ContactForm() {
             fontSize: 13,
             letterSpacing: 1,
             color: "#EEE8DC",
-            background: "#2C4A34",
+            background: loading ? "#5a7a64" : "#2C4A34",
             borderRadius: 9999,
             padding: "13px 32px",
+            opacity: loading ? 0.7 : 1,
           }}
         >
-          ENVIAR
+          {loading ? "ENVIANDO..." : "ENVIAR"}
         </button>
       </form>
     </section>
