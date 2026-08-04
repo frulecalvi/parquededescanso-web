@@ -59,3 +59,10 @@ export interface ServiciosData {
   subtitulo_servicios: string;
   texto_servicios: string;
 }
+
+export interface PreguntaFrecuenteData {
+  id?: number;
+  orden: number;
+  pregunta: string;
+  respuesta: string;
+}

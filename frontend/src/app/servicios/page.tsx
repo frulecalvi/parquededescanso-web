@@ -2,9 +2,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import ContactForm from "@/components/ContactForm";
-import { WP_API_URL, type ServiciosData } from "@/lib/wordpress";
+import { WP_API_URL, type ServiciosData, type PreguntaFrecuenteData } from "@/lib/wordpress";
 
-const FAQ = [
+const FAQ_FALLBACK = [
   { q: "¿Qué hacer en caso de fallecimiento de un familiar?", a: "En caso de fallecimiento de un familiar comunicarse al teléfono de urgencias 154700700 y un asesor lo orientará en los pasos a seguir." },
   { q: "¿Porqué adquirir una parcela con prevención?", a: "En la prevención usted podrá elegir con total objetividad y contar, además, con un descuento adicional para que, en momentos difíciles, pueda tener la tranquilidad que se necesita y la seguridad de haber tomado la decisión correcta." },
   { q: "¿Cómo realizar un traslado de un cementerio municipal a Parque de Descanso?", a: "Para realizar un traslado de otro cementerio, tiene que gestionar el traslado en el cementerio de origen, tener acta de defunción y orden de traslado. Una vez pactado el turno se debe comunicar con nuestros asesores para coordinar. El titular o los autorizados son los únicos habilitados para hacer este trámite." },
@@ -23,6 +23,7 @@ const FAQ = [
 
 export default async function Servicios() {
   let data: ServiciosData | null = null;
+  let faq: PreguntaFrecuenteData[] = [];
   let error: string | null = null;
 
   try {
@@ -33,6 +34,20 @@ export default async function Servicios() {
     data = (await res.json())[0];
   } catch (err) {
     error = err instanceof Error ? err.message : "Error desconocido";
+  }
+
+  try {
+    const resFaq = await fetch(`${WP_API_URL}/preguntas-frecuentes?per_page=60`, {
+      cache: "no-store",
+    });
+    if (resFaq.ok) {
+      const faqData = await resFaq.json();
+      if (Array.isArray(faqData)) {
+        faq = faqData.sort((a: PreguntaFrecuenteData, b: PreguntaFrecuenteData) => a.orden - b.orden);
+      }
+    }
+  } catch {
+    // FAQ fetch es opcional, usamos fallback si falla
   }
 
   return (
@@ -124,8 +139,8 @@ export default async function Servicios() {
           `}</style>
 
           <div className="flex flex-col">
-            {FAQ.map((item, i) => (
-              <div key={i} className="faq-item" style={{ borderBottom: "1px solid rgba(75,107,69,0.25)", padding: "14px 0" }}>
+            {(faq.length > 0 ? faq : FAQ_FALLBACK).map((item, i) => (
+              <div key={'id' in item ? item.id : i} className="faq-item" style={{ borderBottom: "1px solid rgba(75,107,69,0.25)", padding: "14px 0" }}>
                 <input type="checkbox" id={`faq-${i}`} className="sr-only" />
                 <label
                   htmlFor={`faq-${i}`}
@@ -144,13 +159,13 @@ export default async function Servicios() {
                     WebkitTapHighlightColor: "transparent",
                   }}
                 >
-                  <span>{i + 1}. {item.q}</span>
+                  <span>{i + 1}. {'pregunta' in item ? item.pregunta : item.q}</span>
                   <span
                     className="faq-toggle flex-shrink-0"
                     style={{ color: "#4B6B45", fontSize: 18 }}
                   />
                 </label>
-                <p
+                <div
                   className="faq-answer"
                   style={{
                     color: "#4B6B45",
@@ -158,8 +173,8 @@ export default async function Servicios() {
                     lineHeight: 1.2,
                   }}
                 >
-                  {item.a}
-                </p>
+                  {'respuesta' in item ? item.respuesta : item.a}
+                </div>
               </div>
             ))}
           </div>
