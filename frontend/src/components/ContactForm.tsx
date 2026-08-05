@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import Script from "next/script";
+
 
 declare global {
   interface Window {
@@ -57,6 +57,34 @@ export default function ContactForm() {
   }, []);
 
   useEffect(() => {
+    const scriptId = "cf-turnstile-script";
+
+    const tryRender = () => {
+      if (turnstileRef.current && window.turnstile && !turnstileLoaded.current) {
+        handleTurnstileLoad();
+      }
+    };
+
+    const existingScript = document.getElementById(scriptId) as HTMLScriptElement | null;
+
+    if (existingScript) {
+      if (window.turnstile) {
+        tryRender();
+      } else {
+        existingScript.addEventListener("load", tryRender);
+        return () => {
+          existingScript.removeEventListener("load", tryRender);
+        };
+      }
+    } else {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.onload = tryRender;
+      document.head.appendChild(script);
+    }
+
     return () => {
       if (window.turnstile && turnstileWidgetId.current) {
         try {
@@ -68,7 +96,7 @@ export default function ContactForm() {
         turnstileLoaded.current = false;
       }
     };
-  }, []);
+  }, [handleTurnstileLoad]);
 
   if (sent) {
     return (
@@ -134,11 +162,7 @@ export default function ContactForm() {
       className="mx-auto px-6"
       style={{ maxWidth: 1100, marginTop: "clamp(48px, 7vw, 72px)" }}
     >
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        strategy="lazyOnload"
-        onLoad={handleTurnstileLoad}
-      />
+
       <h2
         className="font-bold underline"
         style={{
