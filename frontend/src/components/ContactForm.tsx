@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Script from "next/script";
 
 declare global {
@@ -8,6 +8,7 @@ declare global {
     turnstile: {
       render: (container: string | HTMLElement, options: Record<string, unknown>) => string;
       reset: (widgetIdOrContainer?: string | HTMLElement) => void;
+      remove: (widgetId: string) => void;
     };
   }
 }
@@ -25,17 +26,20 @@ export default function ContactForm() {
   });
   const turnstileToken = useRef("");
   const turnstileRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
+  const turnstileLoaded = useRef(false);
 
   const resetTurnstile = useCallback(() => {
-    if (window.turnstile && turnstileRef.current) {
-      window.turnstile.reset(turnstileRef.current);
+    if (window.turnstile && turnstileWidgetId.current) {
+      window.turnstile.reset(turnstileWidgetId.current);
     }
     turnstileToken.current = "";
   }, []);
 
   const handleTurnstileLoad = useCallback(() => {
-    if (turnstileRef.current && window.turnstile) {
-      window.turnstile.render(turnstileRef.current, {
+    if (turnstileRef.current && window.turnstile && !turnstileLoaded.current) {
+      turnstileLoaded.current = true;
+      turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
         sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "",
         action: "turnstile-spin-v2",
         theme: "light",
@@ -50,6 +54,20 @@ export default function ContactForm() {
         },
       });
     }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (window.turnstile && turnstileWidgetId.current) {
+        try {
+          window.turnstile.remove(turnstileWidgetId.current);
+        } catch {
+          // widget ya limpio
+        }
+        turnstileWidgetId.current = null;
+        turnstileLoaded.current = false;
+      }
+    };
   }, []);
 
   if (sent) {
