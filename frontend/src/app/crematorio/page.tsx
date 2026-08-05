@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
@@ -5,14 +6,23 @@ import ContactForm from "@/components/ContactForm";
 import ImageSlider from "@/components/ImageSlider";
 import { CrematorioData, WP_API_URL } from "@/lib/wordpress";
 
+export const metadata: Metadata = {
+  title: "Crematorio",
+  description:
+    "Servicio de Cremación en Mendoza. Parque de Descanso ofrece cremaciones dignas con tecnología moderna, respeto y transparencia. Asesoramiento las 24hs.",
+  alternates: {
+    canonical: "https://www.parquededescanso.com/crematorio",
+  },
+};
+
 const cremSlides = [
-  { src: "/assets/crematorio-building.jpg", alt: "Crematorio" },
-  { src: "/assets/hero-monument.jpg", alt: "Crematorio" },
-  { src: "/assets/park-entrance.jpg", alt: "Crematorio" },
-  { src: "/assets/park-1.jpg", alt: "Crematorio" },
-  { src: "/assets/park-3.jpg", alt: "Crematorio" },
-  { src: "/assets/park-4.jpg", alt: "Crematorio" },
-  { src: "/assets/park-5.jpg", alt: "Crematorio" },
+  { src: "/assets/crematorio-building.jpg", alt: "Edificio del Crematorio Parque de Descanso en Mendoza" },
+  { src: "/assets/hero-monument.jpg", alt: "Monumento conmemorativo en Parque de Descanso" },
+  { src: "/assets/park-entrance.jpg", alt: "Entrada del Cementerio Parque de Descanso" },
+  { src: "/assets/park-1.jpg", alt: "Jardines del Parque de Descanso en Guaymallén" },
+  { src: "/assets/park-3.jpg", alt: "Paisajismo natural en Parque de Descanso" },
+  { src: "/assets/park-4.jpg", alt: "Espacios de reflexión en el cementerio parque" },
+  { src: "/assets/park-5.jpg", alt: "Flores y naturaleza en Parque de Descanso" },
 ];
 
 export const dynamic = "force-dynamic";

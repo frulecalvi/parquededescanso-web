@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
@@ -6,14 +7,23 @@ import ImageSlider from "@/components/ImageSlider";
 import DropdownPagos from "@/components/DropdownPagos";
 import { WP_API_URL, type NosotrosData } from "@/lib/wordpress";
 
+export const metadata: Metadata = {
+  title: "Inicio",
+  description:
+    "Parque de Descanso - Empresa Fúnebre en Guaymallén, Mendoza. Cementerio Parque, Cremaciones, Salas Velatorias, Venta de Parcelas y Servicios de Sepelio las 24hs.",
+  alternates: {
+    canonical: "https://www.parquededescanso.com/",
+  },
+};
+
 const homeSlides = [
-  { src: "/assets/hero-monument.jpg", alt: "Parque de Descanso" },
-  { src: "/assets/park-entrance.jpg", alt: "Parque de Descanso" },
-  { src: "/assets/park-1.jpg", alt: "Parque de Descanso" },
-  { src: "/assets/park-2.jpg", alt: "Parque de Descanso" },
-  { src: "/assets/park-3.jpg", alt: "Parque de Descanso" },
-  { src: "/assets/park-4.jpg", alt: "Parque de Descanso" },
-  { src: "/assets/park-5.jpg", alt: "Parque de Descanso" },
+  { src: "/assets/hero-monument.jpg", alt: "Monumento en Parque de Descanso, cementerio parque en Mendoza" },
+  { src: "/assets/park-entrance.jpg", alt: "Entrada principal del Cementerio Parque de Descanso en Guaymallén" },
+  { src: "/assets/park-1.jpg", alt: "Jardines y prados verdes del Parque de Descanso" },
+  { src: "/assets/park-2.jpg", alt: "Sector Este del Cementerio Parque de Descanso" },
+  { src: "/assets/park-3.jpg", alt: "Paisajismo y naturaleza en Parque de Descanso" },
+  { src: "/assets/park-4.jpg", alt: "Espacios de reflexión en Parque de Descanso" },
+  { src: "/assets/park-5.jpg", alt: "Canteros de flores en el Cementerio Parque de Descanso" },
 ];
 
 export const dynamic = "force-dynamic";
@@ -68,7 +78,7 @@ export default async function Home() {
           >
             <span aria-hidden="true"><img src="/assets/contacto-telefono-light.png" alt="" style={{ height: 20, width: "auto", display: "block" }} /></span> LLAMAR A URGENCIAS FÚNEBRES
           </a>
-          <p style={{ color: "rgb(75, 107, 69)", paddingTop: "2em" }}>Empresa Fúnebre • Cementerio Parque • Cremaciones • Salas Velatorias</p>
+          <h1 style={{ color: "rgb(75, 107, 69)", paddingTop: "2em", fontSize: "inherit", fontWeight: "inherit", margin: 0 }}>Empresa Fúnebre • Cementerio Parque • Cremaciones • Salas Velatorias</h1>
         </section>
 
         <ImageSlider slides={homeSlides} />

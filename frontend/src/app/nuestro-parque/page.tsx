@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
@@ -5,14 +6,23 @@ import ContactForm from "@/components/ContactForm";
 import ImageSlider from "@/components/ImageSlider";
 import { NuestroParqueData, WP_API_URL } from "@/lib/wordpress";
 
+export const metadata: Metadata = {
+  title: "Nuestro Parque",
+  description:
+    "Conocé el Cementerio Parque de Descanso en Guaymallén, Mendoza. Amplios prados verdes, 47 sectores, capilla, crematorio y salas velatorias en un entorno de paz y naturaleza.",
+  alternates: {
+    canonical: "https://www.parquededescanso.com/nuestro-parque",
+  },
+};
+
 const npSlides = [
-  { src: "/assets/park-2.jpg", alt: "Nuestro Parque" },
-  { src: "/assets/park-entrance.jpg", alt: "Nuestro Parque" },
-  { src: "/assets/hero-monument.jpg", alt: "Nuestro Parque" },
-  { src: "/assets/park-1.jpg", alt: "Nuestro Parque" },
-  { src: "/assets/park-3.jpg", alt: "Nuestro Parque" },
-  { src: "/assets/park-4.jpg", alt: "Nuestro Parque" },
-  { src: "/assets/park-5.jpg", alt: "Nuestro Parque" },
+  { src: "/assets/park-2.jpg", alt: "Vista panorámica del Cementerio Parque de Descanso" },
+  { src: "/assets/park-entrance.jpg", alt: "Entrada principal del Parque de Descanso en Guaymallén" },
+  { src: "/assets/hero-monument.jpg", alt: "Monumento conmemorativo en Parque de Descanso" },
+  { src: "/assets/park-1.jpg", alt: "Jardines y paisajismo en el Cementerio Parque" },
+  { src: "/assets/park-3.jpg", alt: "Prados verdes y naturaleza en Parque de Descanso" },
+  { src: "/assets/park-4.jpg", alt: "Espacios de reflexión en el Cementerio Parque" },
+  { src: "/assets/park-5.jpg", alt: "Canteros de flores en Parque de Descanso" },
 ];
 
 export const dynamic = "force-dynamic";

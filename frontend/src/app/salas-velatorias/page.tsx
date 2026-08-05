@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
@@ -5,14 +6,23 @@ import ContactForm from "@/components/ContactForm";
 import ImageSlider from "@/components/ImageSlider";
 import { SalasVelatoriasData, WP_API_URL } from "@/lib/wordpress";
 
+export const metadata: Metadata = {
+  title: "Salas Velatorias",
+  description:
+    "Salas Velatorias en Mendoza. Parque de Descanso ofrece espacios climatizados y confortables en el sector oeste del parque, rodeados de naturaleza para despedidas dignas.",
+  alternates: {
+    canonical: "https://www.parquededescanso.com/salas-velatorias",
+  },
+};
+
 const svSlides = [
-  { src: "/assets/velatorias-building.jpg", alt: "Salas Velatorias" },
-  { src: "/assets/hero-monument.jpg", alt: "Salas Velatorias" },
-  { src: "/assets/park-entrance.jpg", alt: "Salas Velatorias" },
-  { src: "/assets/park-2.jpg", alt: "Salas Velatorias" },
-  { src: "/assets/park-3.jpg", alt: "Salas Velatorias" },
-  { src: "/assets/park-4.jpg", alt: "Salas Velatorias" },
-  { src: "/assets/park-5.jpg", alt: "Salas Velatorias" },
+  { src: "/assets/velatorias-building.jpg", alt: "Edificio de las Salas Velatorias en Parque de Descanso" },
+  { src: "/assets/hero-monument.jpg", alt: "Monumento en el Cementerio Parque de Descanso" },
+  { src: "/assets/park-entrance.jpg", alt: "Entrada principal de Parque de Descanso" },
+  { src: "/assets/park-2.jpg", alt: "Vista panorámica del cementerio parque" },
+  { src: "/assets/park-3.jpg", alt: "Prados verdes en Parque de Descanso" },
+  { src: "/assets/park-4.jpg", alt: "Espacios de serenidad en el parque" },
+  { src: "/assets/park-5.jpg", alt: "Flores y paisajismo en Parque de Descanso" },
 ];
 
 export const dynamic = "force-dynamic";

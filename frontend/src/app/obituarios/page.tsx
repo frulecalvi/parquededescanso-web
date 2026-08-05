@@ -1,6 +1,20 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { WP_API_URL, type Obituario } from "@/lib/wordpress";
+
+export const metadata: Metadata = {
+  title: "Obituarios",
+  description: "Obituarios recientes de Parque de Descanso en Mendoza.",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
+};
 
 function formatFecha(fecha: string): string {
   const [y, m, d] = fecha.split("-");

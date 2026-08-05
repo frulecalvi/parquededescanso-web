@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import ContactForm from "@/components/ContactForm";
 import DropdownPagos from "@/components/DropdownPagos";
+import StructuredData from "@/components/StructuredData";
 import { WP_API_URL, type ServiciosData, type PreguntaFrecuenteData } from "@/lib/wordpress";
+
+export const metadata: Metadata = {
+  title: "Servicios",
+  description:
+    "Servicios Fúnebres en Mendoza: Venta de Parcelas, Cremaciones, Salas Velatorias, Sepelio, Asesoramiento las 24hs y Trámites de Transferencia en Parque de Descanso.",
+  alternates: {
+    canonical: "https://www.parquededescanso.com/servicios",
+  },
+};
 
 const FAQ_FALLBACK = [
   { q: "¿Qué hacer en caso de fallecimiento de un familiar?", a: "En caso de fallecimiento de un familiar comunicarse al teléfono de urgencias 154700700 y un asesor lo orientará en los pasos a seguir." },
@@ -22,7 +33,7 @@ const FAQ_FALLBACK = [
   { q: "¿Cómo hacer una transferencia?", a: "Para realizar transferencias de titularidad consulte con nuestros asesores al teléfono 4412900, por WhatsApp al 261 5561461 o bien acercarse por las oficinas de calle Colón 593 o del Cementerio." },
 ];
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export default async function Servicios() {
   let data: ServiciosData | null = null;
@@ -57,6 +68,13 @@ export default async function Servicios() {
     <div style={{ fontFamily: "'Alegreya', serif", background: "#EEE8DC", minHeight: "100vh" }}>
       <Header />
       <main>
+        <StructuredData
+          type="faqPage"
+          faqItems={(faq.length > 0 ? faq : FAQ_FALLBACK).map((item) => ({
+            question: "pregunta" in item ? item.pregunta : item.q,
+            answer: "respuesta" in item ? item.respuesta : item.a,
+          }))}
+        />
         <section className="mx-auto px-6 text-center" style={{ maxWidth: 900, paddingTop: "clamp(32px, 6vw, 64px)" }}>
           <h1 className="font-bold" style={{ fontFamily: "'Alegreya', serif", letterSpacing: 2, color: "#2C4A34", fontSize: "clamp(26px, 4vw, 42px)", margin: 0 }}>
             NUESTROS SERVICIOS
