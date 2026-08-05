@@ -82,25 +82,25 @@ export default async function Home() {
             className="flex flex-wrap justify-center"
             style={{ gap: "clamp(24px, 4vw, 44px)" }}
           >
-            <a href="#" aria-label="Facebook" style={{ color: "#2C4A34" }}>
+            <a href="https://www.facebook.com/parquededescansooficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style={{ color: "#2C4A34" }}>
               <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M13.5 21v-8.2h2.75l.41-3.2h-3.16V7.5c0-.93.26-1.56 1.6-1.56h1.7V3.1C15.98 3.03 15.06 3 13.98 3c-2.55 0-4.3 1.55-4.3 4.4v2.2H6.9v3.2h2.78V21h3.82z" />
               </svg>
             </a>
-            <a href="#" aria-label="Instagram" style={{ color: "#2C4A34" }}>
+            <a href="https://www.instagram.com/parque_de_descanso_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ color: "#2C4A34" }}>
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                 <rect x="3" y="3" width="18" height="18" rx="5" />
                 <circle cx="12" cy="12" r="4.2" />
                 <circle cx="17.4" cy="6.6" r="1" />
               </svg>
             </a>
-            <a href="#" aria-label="YouTube" style={{ color: "#2C4A34" }}>
+            <a href="https://www.youtube.com/@ParquedeDescanso" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style={{ color: "#2C4A34" }}>
               <svg width="34" height="30" viewBox="0 0 34 24" fill="currentColor">
                 <rect x="0" y="0" width="34" height="24" rx="6" />
                 <path d="M13.5 7l9 5-9 5V7z" fill="#EEE8DC" />
               </svg>
             </a>
-            <a href="#" aria-label="WhatsApp" style={{ color: "#2C4A34" }}>
+            <a href="https://wa.me/5492615561461?text=Hola%2C%20me%20comunico%20desde%20la%20web%20de%20Parque%20de%20Descanso.%20Tengo%20una%20consulta%3A" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={{ color: "#2C4A34" }}>
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
                 <path d="M4 20l1.3-4.1A8 8 0 1 1 9 18.4L4 20z" />
                 <path d="M8.5 8.6c0 3.3 2.7 6 6 6 .5 0 1-.6.9-1.1l-.2-1a.9.9 0 0 0-.9-.7l-1.4.2a5 5 0 0 1-2.9-2.9l.2-1.4a.9.9 0 0 0-.7-.9l-1-.2c-.5-.1-1.1.4-1.1.9v1.1z" fill="currentColor" stroke="none" />
