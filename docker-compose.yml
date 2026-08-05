@@ -17,6 +17,7 @@ services:
       - db
     networks:
       - network
+      - npm_network
 
   db:
     image: mysql:8.0
@@ -42,6 +43,7 @@ services:
       - wordpress
     networks:
       - network
+      - npm_network
 
 volumes:
   wordpress_uploads:
@@ -50,3 +52,5 @@ volumes:
 networks:
   network:
     driver: bridge
+  npm_network:
+    external: true
