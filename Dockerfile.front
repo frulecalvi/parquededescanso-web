@@ -3,7 +3,6 @@
 # ============================================
 
 ARG NODE_VERSION=26.5-alpine3.24
-ARG NGINX_IMAGE_TAG=1.27-alpine
 
 FROM node:${NODE_VERSION} AS dependencies
 
@@ -37,8 +36,6 @@ COPY frontend/ .
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_OUTPUT=export
-ENV NEXT_DIST_DIR=dist
 
 RUN --mount=type=cache,target=/app/.next/cache \
   if [ -f package-lock.json ]; then \
@@ -52,15 +49,23 @@ RUN --mount=type=cache,target=/app/.next/cache \
   fi
 
 # ============================================
-# Stage 3: Serve static export with Nginx
+# Stage 3: Production Runtime
 # ============================================
 
-FROM nginx:${NGINX_IMAGE_TAG} AS runner
+FROM node:${NODE_VERSION} AS runner
 
-# Copy static export output
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Copy custom Nginx configuration
-COPY frontend/nginx.conf /etc/nginx/nginx.conf
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
+
+# Copiar solo lo necesario desde el standalone output
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
 EXPOSE 3000
+
+CMD ["node", "server.js"]

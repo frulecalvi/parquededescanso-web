@@ -22,6 +22,8 @@ const FAQ_FALLBACK = [
   { q: "¿Cómo hacer una transferencia?", a: "Para realizar transferencias de titularidad consulte con nuestros asesores al teléfono 4412900, por WhatsApp al 261 5561461 o bien acercarse por las oficinas de calle Colón 593 o del Cementerio." },
 ];
 
+export const dynamic = "force-dynamic";
+
 export default async function Servicios() {
   let data: ServiciosData | null = null;
   let faq: PreguntaFrecuenteData[] = [];

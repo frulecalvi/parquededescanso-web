@@ -15,6 +15,8 @@ function tipoServicio(valor: string): string {
   return valor === "1" ? "INHUMACIÓN" : "CREMACIÓN";
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function Obituarios() {
   let registros: Obituario[] = [];
   let error: string | null = null;

@@ -15,6 +15,8 @@ const svSlides = [
   { src: "/assets/park-5.jpg", alt: "Salas Velatorias" },
 ];
 
+export const dynamic = "force-dynamic";
+
 export default async function SalasVelatorias() {
   let data: SalasVelatoriasData | null = null;
   let error: string | null = null;

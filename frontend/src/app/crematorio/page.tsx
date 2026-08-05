@@ -15,6 +15,8 @@ const cremSlides = [
   { src: "/assets/park-5.jpg", alt: "Crematorio" },
 ];
 
+export const dynamic = "force-dynamic";
+
 export default async function Crematorio() {
   let data: CrematorioData | null = null;
   let error: string | null = null;

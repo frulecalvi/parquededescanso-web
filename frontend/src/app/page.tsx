@@ -16,6 +16,8 @@ const homeSlides = [
   { src: "/assets/park-5.jpg", alt: "Parque de Descanso" },
 ];
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   let nosotros: NosotrosData | null = null;
   let nosotrosError: string | null = null;

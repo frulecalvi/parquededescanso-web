@@ -15,6 +15,8 @@ const npSlides = [
   { src: "/assets/park-5.jpg", alt: "Nuestro Parque" },
 ];
 
+export const dynamic = "force-dynamic";
+
 export default async function NuestroParque() {
   let data: NuestroParqueData | null = null;
   let error: string | null = null;
