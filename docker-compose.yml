@@ -12,12 +12,11 @@ services:
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     volumes:
-      - wordpress:/usr/src/wordpress
+      - wordpress_uploads:/var/www/html/wp-content/uploads
     depends_on:
       - db
     networks:
       - network
-      - npm_network
 
   db:
     image: mysql:8.0
@@ -43,14 +42,11 @@ services:
       - wordpress
     networks:
       - network
-      - npm_network
 
 volumes:
-  wordpress:
+  wordpress_uploads:
   db:
 
 networks:
   network:
     driver: bridge
-  npm_network:
-    external: true
