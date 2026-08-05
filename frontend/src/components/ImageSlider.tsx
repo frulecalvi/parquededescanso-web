@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface Slide {
   src: string;
@@ -12,9 +12,11 @@ interface ImageSliderProps {
 }
 
 export default function ImageSlider({ slides }: ImageSliderProps) {
-  // Auto-play nativo
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
       const radios = Array.from(
         document.querySelectorAll<HTMLInputElement>('input[name="slider"]')
       );
@@ -23,7 +25,22 @@ export default function ImageSlider({ slides }: ImageSliderProps) {
       const next = (current + 1) % radios.length;
       radios[next].checked = true;
     }, 5500);
-    return () => clearInterval(timer);
+  };
+
+  const handleNavClick = (targetId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const radio = document.getElementById(targetId) as HTMLInputElement | null;
+    if (radio) radio.checked = true;
+    startTimer();
+  };
+
+  // Auto-play nativo
+  useEffect(() => {
+    startTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slides.length]);
 
   const cssRules = slides
@@ -101,6 +118,7 @@ export default function ImageSlider({ slides }: ImageSliderProps) {
               <span key={i}>
                 <label
                   htmlFor={`slide-${prev}`}
+                  onClick={handleNavClick(`slide-${prev}`)}
                   className={`nav-prev-${i}`}
                   aria-label="Anterior"
                   style={{ left: 14 }}
@@ -109,6 +127,7 @@ export default function ImageSlider({ slides }: ImageSliderProps) {
                 </label>
                 <label
                   htmlFor={`slide-${next}`}
+                  onClick={handleNavClick(`slide-${next}`)}
                   className={`nav-next-${i}`}
                   aria-label="Siguiente"
                   style={{ right: 14 }}
