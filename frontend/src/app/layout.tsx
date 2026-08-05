@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
 import TopProgressBar from "@/components/TopProgressBar";
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-[100dvh]">
-        <TopProgressBar />
+        <Suspense fallback={null}>
+          <TopProgressBar />
+        </Suspense>
         {children}
         <WhatsAppFloatingButton />
       </body>
