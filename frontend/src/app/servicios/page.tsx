@@ -33,8 +33,6 @@ const FAQ_FALLBACK = [
   { q: "¿Cómo hacer una transferencia?", a: "Para realizar transferencias de titularidad consulte con nuestros asesores al teléfono 4412900, por WhatsApp al 261 5561461 o bien acercarse por las oficinas de calle Colón 593 o del Cementerio." },
 ];
 
-export const revalidate = 300;
-
 export default async function Servicios() {
   let data: ServiciosData | null = null;
   let faq: PreguntaFrecuenteData[] = [];
@@ -42,7 +40,8 @@ export default async function Servicios() {
 
   try {
     const res = await fetch(`${WP_API_URL}/servicios`, {
-      cache: "no-store",
+      cache: "force-cache",
+      next: { tags: ["servicios"] },
     });
     if (!res.ok) throw new Error(`Error ${res.status}`);
     data = (await res.json())[0];
@@ -52,7 +51,8 @@ export default async function Servicios() {
 
   try {
     const resFaq = await fetch(`${WP_API_URL}/preguntas-frecuentes?per_page=60`, {
-      cache: "no-store",
+      cache: "force-cache",
+      next: { tags: ["faq"] },
     });
     if (resFaq.ok) {
       const faqData = await resFaq.json();

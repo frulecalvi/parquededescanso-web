@@ -11,6 +11,8 @@ services:
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WEBHOOK_URL: ${WEBHOOK_URL}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET}
     volumes:
       - wordpress_uploads:/var/www/html/wp-content/uploads
     depends_on:
@@ -38,6 +40,8 @@ services:
     restart: always
     ports:
       - ${FRONTEND_PORT}:3000
+    environment:
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET}
     depends_on:
       - wordpress
     networks:

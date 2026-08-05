@@ -25,15 +25,14 @@ const cremSlides = [
   { src: "/assets/park-5.jpg", alt: "Flores y naturaleza en Parque de Descanso" },
 ];
 
-export const dynamic = "force-dynamic";
-
 export default async function Crematorio() {
   let data: CrematorioData | null = null;
   let error: string | null = null;
 
   try {
     const res = await fetch(`${WP_API_URL}/crematorio`, {
-      cache: "no-store",
+      cache: "force-cache",
+      next: { tags: ["crematorio"] },
     });
     if (!res.ok) throw new Error(`Error ${res.status}`);
     data = (await res.json())[0];

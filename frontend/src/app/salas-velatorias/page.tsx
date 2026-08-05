@@ -25,15 +25,14 @@ const svSlides = [
   { src: "/assets/park-5.jpg", alt: "Flores y paisajismo en Parque de Descanso" },
 ];
 
-export const dynamic = "force-dynamic";
-
 export default async function SalasVelatorias() {
   let data: SalasVelatoriasData | null = null;
   let error: string | null = null;
 
   try {
     const res = await fetch(`${WP_API_URL}/salas-velatorias?slug=ajustes-salas-velatorias`, {
-      cache: "no-store",
+      cache: "force-cache",
+      next: { tags: ["salas-velatorias"] },
     });
     if (!res.ok) throw new Error(`Error ${res.status}`);
     data = (await res.json())[0];

@@ -25,15 +25,14 @@ const npSlides = [
   { src: "/assets/park-5.jpg", alt: "Canteros de flores en Parque de Descanso" },
 ];
 
-export const dynamic = "force-dynamic";
-
 export default async function NuestroParque() {
   let data: NuestroParqueData | null = null;
   let error: string | null = null;
 
   try {
     const res = await fetch(`${WP_API_URL}/nuestro-parque?slug=ajustes-nuestro-parque`, {
-      cache: "no-store",
+      cache: "force-cache",
+      next: { tags: ["nuestro-parque"] },
     });
     if (!res.ok) throw new Error(`Error ${res.status}`);
     data = (await res.json())[0];

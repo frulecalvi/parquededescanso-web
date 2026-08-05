@@ -26,15 +26,14 @@ const homeSlides = [
   { src: "/assets/park-5.jpg", alt: "Canteros de flores en el Cementerio Parque de Descanso" },
 ];
 
-export const dynamic = "force-dynamic";
-
 export default async function Home() {
   let nosotros: NosotrosData | null = null;
   let nosotrosError: string | null = null;
 
   try {
     const res = await fetch(`${WP_API_URL}/inicio?slug=ajustes-inicio`, {
-      cache: "no-store",
+      cache: "force-cache",
+      next: { tags: ["inicio"] },
     });
     if (!res.ok) throw new Error(`Error ${res.status}`);
     nosotros = (await res.json())[0];
